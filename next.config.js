@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const { version } = require('./package.json')
+
+const nextConfig = {
+  reactStrictMode: false,
+  env: {
+    version,
+  },
+}
 
 module.exports = nextConfig

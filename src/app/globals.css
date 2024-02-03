@@ -2,26 +2,556 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    /* 
+    * @global
+    * Text size modifier variable
+    */
+    --text-size-modifier: 1;
+
+    /* 
+    * @global
+    * View modifier variable
+    */
+    --view-modifier: 468px;
+
+    /* 
+    * @global
+    * Leading trim variables for CC Neue
+    */
+    --neue-ascent: 0.739734em;
+    --neue-cap-height: 0.7109375em;
+    --neue-line-gap: -0.023489em;
+    --neue-text-box-trim-start-cap: calc(
+      (var(--neue-cap-height) - var(--neue-ascent) + var(--neue-line-gap) / 2)
+    );
+    --neue-descent: -0.244140625em;
+    --neue-text-box-trim-end-alphabetic: calc(
+      (var(--neue-descent) - var(--neue-line-gap) / 2)
+    );
+
+    /* 
+    * @global
+    * Leading trim variables for Monaspace
+    */
+    --mono-ascent: 0.999734em;
+    --mono-cap-height: 0.4809375em;
+    --mono-line-gap: 0.43489em;
+    --mono-text-box-trim-start-cap: calc(
+      (var(--mono-cap-height) - var(--mono-ascent) + var(--mono-line-gap) / 2)
+    );
+    --mono-descent: -0.244140625em;
+    --mono-text-box-trim-end-alphabetic: calc(
+      (var(--mono-descent) - var(--mono-line-gap) / 2)
+    );
+
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    --radius: 0.5rem;
+  }
+  /* 
+  * @base
+  * Color variables utilizing themes
+  */
+  html[data-theme='anonyma-amber'] {
+    --color-offwhite: 235 246 245;
+    --color-light: 218 237 235;
+    --color-dark: 17 17 17;
+    --color-gray: 24 27 29;
+    --color-offgray: 72 87 98;
+    --color-accent-primary: 253 72 47;
+    --color-accent-secondary: 237 107 89;
+  }
+  html[data-theme='neon-darkness'] {
+    --color-offwhite: 246 246 246;
+    --color-light: 233 233 233;
+    --color-dark: 0 0 0; /* Neon Darkness theme dark color */
+    --color-gray: 9 9 9;
+    --color-offgray: 72 87 98;
+    --color-accent-primary: 255 255 255;
+    --color-accent-secondary: 255 255 255;
+  }
+  html[data-theme='vanta-black'] {
+    --color-offwhite: 240 240 250;
+    --color-light: 201 209 208;
+    --color-dark: 9 10 17; /* Vanta Black theme dark color */
+    --color-gray: 15 17 29;
+    --color-offgray: 73 73 73;
+    --color-accent-primary: 150 47 253;
+    --color-accent-secondary: 243 245 140;
+  }
+  html[data-theme='jaded-cyan'] {
+    --color-offwhite: 24 27 29; /* 17 17 17 */
+    --color-light: 17 17 43; /* 24 27 29 */
+    --color-dark: 205 226 215; /* 235 246 245 */
+    --color-gray: 218 237 235; /* 218 237 235 */
+    --color-offgray: 72 87 98;
+    --color-accent-primary: 0 204 204; /* Jaded Cyan theme primary accent color */
+    --color-accent-secondary: 0 153 153; /* Jaded Cyan theme secondary accent color */
+  }
+
+  /* 
+  * @base
+  * View & text size options 
+  */
+  html[data-prefers-view='md'] {
+    --view-modifier: 564px;
+  }
+  html[data-prefers-view='lg'] {
+    --view-modifier: 648px;
+  }
+  html[data-prefers-text-size='sm'] {
+    --text-size-modifier: 0.9;
+  }
+  html[data-prefers-text-size='lg'] {
+    --text-size-modifier: 1.2;
+  }
+
+  /* 
+   * Prevent default scrollbar 
+   */
+  html,
+  body {
+    width: 100%;
+    min-height: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: -moz-scrollbars-none;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 
+   * Selection colors 
+   */
+  ::selection {
+    background-color: rgb(var(--color-light));
+    color: rgb(var(--color-dark));
+  }
+
+  /* 
+   * Leading trim cap utility 
+   */
+  .leading-trim-cap {
+    --trim-start-cap: var(--neue-text-box-trim-start-cap);
+    --trim-end-alphabetic: var(--neue-text-box-trim-end-alphabetic);
+  }
+  .leading-trim-cap:before {
+    @apply table;
+    @apply content-empty;
+    @apply mb-[var(--trim-start-cap)];
+  }
+  .leading-trim-cap:after {
+    @apply table;
+    @apply content-empty;
+    @apply mt-[var(--trim-end-alphabetic)];
+  }
+  .leading-trim-cap-mono {
+    --trim-start-cap-mono: var(--mono-text-box-trim-start-cap);
+    --trim-end-alphabetic-mono: var(--mono-text-box-trim-end-alphabetic);
+  }
+  .leading-trim-cap-mono:before {
+    @apply table;
+    @apply content-empty;
+    @apply mb-[var(--trim-start-cap-mono)];
+  }
+  .leading-trim-cap-mono:after {
+    @apply table;
+    @apply content-empty;
+    @apply mt-[var(--trim-end-alphabetic-mono)];
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  /*
+ * @components
+ * Main body background
+ */
+  body {
+    --gradient-color-1: rgb(var(--color-dark));
+    --gradient-color-2: rgb(var(--color-dark));
+    --gradient-color-3: rgb(var(--color-dark));
+    --gradient-color-4: rgb(var(--color-dark));
+  }
+  .bg--body-gradient {
+    --gradient-color-1: #ff2f00;
+    --gradient-color-2: #fd5f00;
+    --gradient-color-3: #ff1000;
+    --gradient-color-4: #521a0d;
+    background: linear-gradient(
+        275deg,
+        var(--gradient-color-1) 0%,
+        var(--gradient-color-1) 22.5%,
+        var(--gradient-color-3) 45%,
+        var(--gradient-color-4) 100%
+      ),
+      rgb(var(--color-dark)) !important;
+  }
+  .bg--body-dark {
+    background: linear-gradient(
+        270deg,
+        var(--gradient-color-1) 0%,
+        var(--gradient-color-2) 22.5%,
+        var(--gradient-color-3) 45%,
+        var(--gradient-color-4) 100%
+      ),
+      rgb(var(--color-dark));
+  }
+  .landing--img {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.34, 1, 0.65, 1);
+    transition-duration: 1350ms;
+  }
+  .rect--mask {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.34, 1, 0.65, 1);
+    transition-duration: 1050ms;
+    mask-image: url(/landing-mask.svg);
+    mask-size: 390%;
+    mask-repeat: repeat-y;
+    mask-position: center center;
+  }
+  @media (min-width: 640px) {
+    .rect--mask {
+      mask-size: cover;
+      mask-repeat: no-repeat;
+    }
+    .bg--body-gradient {
+      background: linear-gradient(
+          270deg,
+          var(--gradient-color-1) 0%,
+          var(--gradient-color-2) 22.5%,
+          var(--gradient-color-3) 45%,
+          var(--gradient-color-4) 100%
+        ),
+        rgb(var(--color-dark)) !important;
+    }
+  }
+  @media (max-width: 413px) and (min-height: 1020px) {
+    .rect--mask {
+      @apply !backdrop-blur-0;
+      @apply !bg-transparent;
+    }
+  }
+  .marquee-mask {
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-image: linear-gradient(
+      270deg,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+  }
+  /*
+ * @components
+ * Apply modifiable text size
+ */
+  [class*='text--body'],
+  [class*='text--mono'] {
+    @apply text-[calc(var(--text-size)*var(--text-size-modifier))];
+    @apply transition-all;
+    @apply antialiased;
+  }
+  [class*='text--body'] {
+    @apply leading-base;
+    @apply leading-trim-cap;
+  }
+  /*
+ * @components
+ * CC Neue typography
+ */
+  .text--body-display {
+    --text-size: 84px;
+    @apply font-neue-light;
+    @apply tracking-tightest;
+  }
+  .text--body-4xl {
+    --text-size: 40px;
+    font-variation-settings: 'shea' 420, 'wght' 430;
+    @apply font-neue-light;
+    @apply tracking-tighter;
+  }
+  .text--body-3xl {
+    --text-size: 36px;
+    font-variation-settings: 'shea' 420, 'wght' 500;
+    @apply font-neue-normal;
+    @apply tracking-tightest;
+  }
+  .text--body-2xl {
+    --text-size: 24px;
+    font-variation-settings: 'shea' 420, 'wght' 430;
+    @apply font-neue-light;
+    @apply tracking-tighter;
+  }
+  .text--body-xl {
+    --text-size: 22px;
+    font-variation-settings: 'shea' 420, 'wght' 400;
+    @apply font-neue-light;
+    @apply tracking-tighter;
+  }
+  .text--body-lg {
+    --text-size: 18px;
+    font-variation-settings: 'shea' 420, 'wght' 400;
+    @apply font-neue-normal;
+    @apply tracking-tighter;
+  }
+  .text--body-label {
+    --text-size: 14px;
+    font-variation-settings: 'shea' 420, 'wght' 400;
+    @apply font-neue-bold;
+    @apply tracking-tight;
+  }
+  .text--body-base {
+    --text-size: 15px;
+    font-variation-settings: 'shea' 420, 'wght' 500;
+    @apply font-neue-normal;
+    @apply tracking-tighter;
+    @apply leading-[1.1];
+  }
+  .text--body-sm {
+    --text-size: 13px;
+    font-variation-settings: 'shea' 420, 'wght' 500;
+    @apply font-neue-normal;
+    @apply tracking-wide;
+  }
+  .text--body-xs {
+    --text-size: 12px;
+    font-variation-settings: 'shea' 420, 'wght' 500;
+    @apply font-neue-normal;
+    @apply tracking-tight;
+  }
+  .text--body-tooltip {
+    --text-size: 13px;
+    font-variation-settings: 'shea' 420, 'wght' 500;
+    @apply font-neue-normal;
+    @apply tracking-tight;
+  }
+  .text-logo {
+    @apply text-[24px];
+    @apply font-neue-light;
+    @apply tracking-tighter;
+  }
+  .text--body-400 {
+    font-variation-settings: 'shea' 420, 'wght' 400;
+  }
+  .text--body-500 {
+    font-variation-settings: 'shea' 420, 'wght' 500;
+  }
+  .text--body-833 {
+    font-variation-settings: 'shea' 420, 'wght' 833;
+  }
+  /*
+   * @components
+   * Monospace typography
+  */
+  [class*='text--mono-'] {
+    @apply font-mono;
+    @apply leading-trim-cap-mono;
+  }
+  .text--mono-base {
+    --text-size: 14px;
+    @apply tracking-tight;
+    @apply font-normal;
+  }
+  .text--mono-italic {
+    font-variation-settings: 'slnt' -11;
+  }
+  .text--mono-sm {
+    --text-size: 13px;
+    @apply tracking-tight;
+    @apply font-normal;
+  }
+  .text--mono-xs {
+    --text-size: 11px;
+    font-variation-settings: 'wght' 500;
+    @apply tracking-tighter;
+    @apply font-medium;
+  }
+  .text--mono-caps-base {
+    --text-size: 11px;
+    font-variation-settings: 'wght' 600;
+    @apply tracking-tighter;
+    @apply leading-tight;
+    @apply uppercase;
+    @apply font-medium;
+  }
+  .text--mono-caps-sm {
+    --text-size: 10px;
+    font-variation-settings: 'wght' 600;
+    @apply leading-trim-cap-mono;
+    @apply tracking-tighter;
+    @apply leading-base;
+    @apply uppercase;
+    @apply font-medium;
+  }
+
+  @media (min-width: 640px) {
+    .text--body-display {
+      --text-size: 100px;
+    }
+    .text--body-4xl {
+      --text-size: 56px;
+    }
+    .text--body-3xl {
+      --text-size: 40px;
+    }
+    .text--body-2xl {
+      --text-size: 26px;
+    }
+    .text--body-xl {
+      --text-size: 24px;
+    }
+    .text--body-lg {
+      --text-size: 20px;
+    }
+    .text--body-label {
+      --text-size: 15px;
+    }
+  }
+
+  /*
+   * @components
+   * Carousel side fade outs
+  */
+  div[aria-roledescription='carousel'][data-fade-left]::after {
+    @apply z-10;
+    @apply pointer-events-none;
+    @apply block;
+    @apply md:content-empty;
+    @apply w-7 md:w-16;
+    @apply h-full;
+    @apply absolute;
+    @apply top-0;
+    @apply bg-gradient-to-l;
+    @apply from-dark/0;
+    @apply to-dark;
+  }
+  div[aria-roledescription='carousel'][data-fade-right]::before {
+    @apply z-10;
+    @apply pointer-events-none;
+    @apply block;
+    @apply content-empty;
+    @apply w-7 md:w-16;
+    @apply h-full;
+    @apply absolute;
+    @apply top-0;
+    @apply right-0;
+    @apply bg-gradient-to-l;
+    @apply from-dark;
+    @apply to-dark/0;
+  }
+
+  /*
+   * @components
+   * Message bubble timestamps
+  */
+  div[role='message-bubble'][data-timestamp] {
+    @apply max-sm:mb-4;
+  }
+  div[role='message-bubble'][data-timestamp]::after {
+    @apply max-sm:content-[attr(data-timestamp)];
+    @apply max-sm:inline-flex;
+    @apply max-sm:absolute;
+    @apply max-sm:-bottom-1;
+    @apply max-sm:text--body-sm;
+    @apply max-sm:text-[11px];
+    @apply max-sm:text-light/30;
+    @apply max-sm:opacity-100;
+  }
+  div[role='message-bubble'][data-timestamp][data-sender='anon']::after {
+    @apply max-sm:left-0;
+  }
+  div[role='message-bubble'][data-timestamp][data-sender='user']::after {
+    @apply max-sm:right-0;
+  }
+}
+
+/*
+ * @components
+ * Tag input color vars
+ */
+.rti--container {
+  --rti-bg: rgba(var--gray / 90);
+  --rti-border: rgba(var--light / 10) !important;
+  --rti-main: rgba(var--light / 25) !important;
+  --rti-radius: 8px !important;
+  --rti-s: 6px !important;
+  --rti-tag: transparent !important;
+  --rti-tag-remove: rgba(var--light / 50) !important;
+  border: 1px solid rgb(var(--color-light) / 0.1) !important;
+  @apply w-full;
+  @apply rounded-md !bg-gray/90;
+}
+.rti--container:focus-within {
+  border: 2px solid rgb(var(--color-light) / 1);
+  margin-bottom: -2px;
+}
+
+.rti--tag > span {
+  @apply font-mono;
+  @apply leading-trim-cap-mono;
+  @apply uppercase;
+  @apply text--mono-sm;
+  @apply text-xs;
+}
+
+.rti--tag button[type='button'] {
+  font-size: 10px;
+  line-height: 1;
+  padding-right: 0;
+  padding-left: 4px;
+  outline: 0;
+}
+/*
+ * @components
+ * Sonner corrections
+ */
+[data-sonner-toast] [data-title] {
+  font-family: var(--font-sans) !important;
+  font-variation-settings: 'shea' 420, 'wght' 500;
+  font-size: 15px;
+  margin-top: 2px;
+}
+[data-sonner-toast] [data-description] {
+  font-family: var(--font-sans) !important;
+  font-variation-settings: 'shea' 420, 'wght' 400;
+  font-size: 13px;
+  color: rgb(var(--color-light) / 0.5);
+  margin-top: -4px;
+}
+
+body.scrolled-down .container-scrollToBottom {
+  @apply opacity-0;
+  @apply -mb-24;
 }
