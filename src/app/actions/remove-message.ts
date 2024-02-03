@@ -17,7 +17,7 @@ class CustomError<T = string> extends Error {
 
 export async function removeMessage(
   prevState: ActionResponseState,
-  data: FormData
+  data: FormData,
 ) {
   try {
     const { id, senderId, senderUsername, message, timestamp, channelId } =
@@ -69,10 +69,10 @@ export async function removeMessage(
     } satisfies Message
 
     // Notify removed message to subscribed users
-    pusherServer.trigger(
+    await pusherServer.trigger(
       toPusherKey(`channel:${channelId}:messages`),
       'message',
-      messageData
+      messageData,
     )
 
     // Persist message data in db
@@ -96,13 +96,13 @@ export async function removeMessage(
           })),
         } as ActionResponseState)
       : error instanceof CustomError
-      ? ({
-          status: 'error',
-          message: error.message,
-        } as ActionResponseState)
-      : ({
-          status: 'error',
-          message: 'Something went wrong. Please try again.',
-        } as ActionResponseState)
+        ? ({
+            status: 'error',
+            message: error.message,
+          } as ActionResponseState)
+        : ({
+            status: 'error',
+            message: 'Something went wrong. Please try again.',
+          } as ActionResponseState)
   }
 }
