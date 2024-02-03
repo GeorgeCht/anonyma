@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import { Footer, InnerSection } from '@/components/layout'
 import { usePathname, useRouter } from 'next/navigation'
@@ -17,7 +17,7 @@ export default function NotFoundPage() {
     description: `The ${missingElement.toLowerCase()} you' re looking for has probably expired.`,
   })
   return (
-    <React.Fragment>
+    <Suspense>
       <InnerSection>
         <div className={'flex flex-col justify-between w-full min-h-layout'}>
           <div>
@@ -35,6 +35,6 @@ export default function NotFoundPage() {
           <Footer className={'pt-6'} />
         </div>
       </InnerSection>
-    </React.Fragment>
+    </Suspense>
   )
 }

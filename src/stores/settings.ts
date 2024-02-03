@@ -75,8 +75,8 @@ const useSettings = create(
     }),
     {
       name: 'settings',
-    }
-  )
+    },
+  ),
 )
 
 export default useSettings

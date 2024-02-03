@@ -25,17 +25,18 @@ const Logo = ({ state }: { state: 'dark' | 'light' }) => {
         <span
           role={'heading'}
           aria-label={'logo'}
+          aria-level={2}
           className={cn(
             state === 'dark' && 'bg-dark',
             state === 'light' && 'bg-light',
-            'w-[14px] h-[13px] mb-[1px] rounded-[2px]'
+            'w-[14px] h-[13px] mb-[1px] rounded-[2px]',
           )}
         />
         <h2
           className={clsx(
             state === 'dark' && 'text-dark',
             state === 'light' && 'text-light',
-            'text-logo'
+            'text-logo',
           )}
         >
           <React.Fragment>

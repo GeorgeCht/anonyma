@@ -7,6 +7,7 @@ import { TooltipProvider } from '@/components/shadcn/tooltip'
 import { Toaster } from '@/components/shadcn/sonner'
 import { Body } from '@/components/layout'
 import HtmlTag from '@/components/layout/html-tag'
+import { Suspense } from 'react'
 
 const sans = localFont({
   src: '/assets/ccneue.ttf',
@@ -40,17 +41,19 @@ export default function RootLayout({
   return (
     <HtmlTag>
       <Body className={`${mono.variable} ${sans.variable} ${sans.className}`}>
-        <Header />
-        <LenisProvider>
-          <main
-            className={
-              'min-h-layout m-auto px-4 md:px-0 w-full max-w-prefered transition-all'
-            }
-          >
-            <TooltipProvider>{children}</TooltipProvider>
-          </main>
-          <Toaster />
-        </LenisProvider>
+        <Suspense fallback={null}>
+          <Header />
+          <LenisProvider>
+            <main
+              className={
+                'min-h-layout m-auto px-4 md:px-0 w-full max-w-prefered transition-all'
+              }
+            >
+              <TooltipProvider>{children}</TooltipProvider>
+            </main>
+            <Toaster />
+          </LenisProvider>
+        </Suspense>
       </Body>
     </HtmlTag>
   )

@@ -8,27 +8,33 @@ import {
 import { type CarouselApi } from '@/components/shadcn/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 
-import React, { FC, useCallback, useContext, useLayoutEffect } from 'react'
+import React, {
+  FC,
+  Suspense,
+  useCallback,
+  useContext,
+  useLayoutEffect,
+} from 'react'
 import * as Search from '@/features/search'
 
 import { useSearchParams } from 'next/navigation'
 
-import { useLenis } from '@/features/essentials/lenis'
 import DotIcon from '@/components/ui/icons/dot-icon'
 import ActionsDropdown from '@/features/dropdowns/actions-dropdown'
 import { Footer, PageSection, StickyHeader } from '@/components/layout'
 
 import * as Dialog from '@/features/dialogs'
 import * as Channels from '@/features/channels'
+
 import SubHeading from '@/components/ui/headings/sub'
 import MainHeading from '@/components/ui/headings/main'
 import ChannelBanner from '@/features/channels/banner'
 
-const Page: FC = () => {
+const Page = () => {
   const searchParams = useSearchParams().get('search')
 
   return (
-    <React.Fragment>
+    <Suspense fallback={null}>
       <PageSection>
         <StickyHeader>
           <div className={'flex items-center justify-between gap-6 sm:gap-8'}>
@@ -167,7 +173,7 @@ const Page: FC = () => {
           aria-hidden
         />
       </Dialog.Settings>
-    </React.Fragment>
+    </Suspense>
   )
 }
 

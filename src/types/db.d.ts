@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 interface User {
   id: string
   name: string
@@ -5,6 +6,7 @@ interface User {
   channels: number
 }
 
+// eslint-disable-next-line no-unused-vars
 interface Channel {
   id: string
   name: string
@@ -16,6 +18,7 @@ interface Channel {
   tags?: Array<string>
 }
 
+// eslint-disable-next-line no-unused-vars
 interface Message {
   id: string
   senderId: string

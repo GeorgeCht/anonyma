@@ -33,7 +33,7 @@ export const buttonVariants = cva(
       size: 'sm',
       intent: 'fit',
     },
-  }
+  },
 )
 
 export interface ButtonProps
@@ -55,7 +55,7 @@ const Button = forwardRef(
       intent,
       ...props
     }: ButtonProps,
-    ref: ForwardedRef<HTMLButtonElement>
+    ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     const processChildren = (children: ReactNode) => {
       const isTextOnly = typeof children === 'string'
@@ -67,8 +67,8 @@ const Button = forwardRef(
               size === 'xl'
                 ? 'text--body-xl'
                 : size === '4xl'
-                ? 'text--body-4xl'
-                : 'text--body-base'
+                  ? 'text--body-4xl'
+                  : 'text--body-base'
             }
           >
             {children}
@@ -78,7 +78,7 @@ const Button = forwardRef(
         const childArray = React.Children.toArray(children)
 
         const textIndex = childArray.findIndex(
-          (child) => typeof child === 'string'
+          (child) => typeof child === 'string',
         )
         const otherElementsBefore = childArray.slice(0, textIndex)
         const otherElementsAfter = childArray.slice(textIndex + 1)
@@ -108,7 +108,9 @@ const Button = forwardRef(
         {processChildren(children)}
       </button>
     )
-  }
+  },
 )
+
+Button.displayName = 'Button'
 
 export default Button

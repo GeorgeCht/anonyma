@@ -1,17 +1,17 @@
 'use client'
 
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import { Footer, InnerSection } from '@/components/layout'
-import { Button } from '@/components/ui'
 import { useRouter } from 'next/navigation'
 
 import * as Heading from '@/components/ui/headings'
+import { Button } from '@/components/ui/elements'
 
 export default function NotFoundPage() {
   const router = useRouter()
   return (
-    <React.Fragment>
+    <Suspense fallback={null}>
       <InnerSection>
         <div className={'flex flex-col justify-between w-full min-h-layout'}>
           <div>
@@ -29,6 +29,6 @@ export default function NotFoundPage() {
           <Footer className={'pt-6'} />
         </div>
       </InnerSection>
-    </React.Fragment>
+    </Suspense>
   )
 }

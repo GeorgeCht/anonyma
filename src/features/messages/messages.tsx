@@ -69,7 +69,7 @@ const Messages = React.forwardRef<
                     className={clsx(
                       'text--body-sm mt-5 mb-2 text-light/30',
                       'cursor-default transition-colors',
-                      isCurrentUser && 'text-right w-full'
+                      isCurrentUser && 'text-right w-full',
                     )}
                   >
                     @{message.senderUsername}
@@ -96,5 +96,7 @@ const Messages = React.forwardRef<
     </React.Fragment>
   )
 })
+
+Messages.displayName = 'Messages'
 
 export default Messages

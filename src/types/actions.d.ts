@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 type ActionResponseState =
   | {
       status: 'success'
@@ -13,6 +14,7 @@ type ActionResponseState =
     }
   | null
 
+// eslint-disable-next-line no-unused-vars
 type DataResponseState<T> =
   | {
       status: 'success'
@@ -24,6 +26,7 @@ type DataResponseState<T> =
     }
   | null
 
+// eslint-disable-next-line no-unused-vars
 type Members = {
   count: number
 }

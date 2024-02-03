@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState, useRef, Suspense } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Dialog,
   DialogClose,
@@ -10,28 +10,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/shadcn/dialog'
-import {
-  DialogBody,
-  DialogClarification,
-  DialogErrorMessage,
-  DialogHeading,
-  DialogLabelDescription,
-  DialogLabelTitle,
-} from '@/features/dialogs/dialog-items'
+import { DialogBody, DialogHeading } from '@/features/dialogs/dialog-items'
 import { Input } from '@/components/shadcn/input'
-import { Switch } from '@/components/shadcn/switch'
-import { TagsInput } from 'react-tag-input-component'
 import { useFormState, useFormStatus } from 'react-dom'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { messageSchema, MessageSchemaType } from '@/lib/validators'
-import { newChannel } from '@/app/actions/new-channel'
 import { toast } from 'sonner'
-import clsx from 'clsx'
-import { Button, Clarification } from '@/components/ui/elements'
-import useMessages from '@/stores/messages'
+import { Button } from '@/components/ui/elements'
 import { removeMessage } from '@/app/actions/remove-message'
 import { AlertTriangle } from 'lucide-react'
+import useMessages from '@/stores/messages'
 
 const RemoveMessage = ({ children }: { children: React.ReactNode }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -88,7 +77,7 @@ const RemoveMessage = ({ children }: { children: React.ReactNode }) => {
               <DialogTitle>Remove message</DialogTitle>
             </div>
           </DialogHeader>
-          <DialogBody className={'min-h-28'}>
+          <DialogBody className={'!min-h-28'}>
             <DialogHeading className={'w-full max-w-72 pt-3'}>
               Are you sure you want to unsent this message?
             </DialogHeading>

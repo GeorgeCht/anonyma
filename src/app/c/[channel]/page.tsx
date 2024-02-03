@@ -1,6 +1,6 @@
 'use server'
 
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import { InnerSection } from '@/components/layout'
 import { getChannelByName } from '@/app/actions/get-channel-by-name'
@@ -27,7 +27,7 @@ export default async function Page({
   !(await userSession.validate()) && redirect('/?sessiontimeout')
 
   return (
-    <React.Fragment>
+    <Suspense fallback={null}>
       <InnerSection>
         <MessageLayout
           messages={initialMessages}
@@ -41,6 +41,6 @@ export default async function Page({
       </InnerSection>
       <MessageInput id={channelData.id} />
       <ChannelDialogs />
-    </React.Fragment>
+    </Suspense>
   )
 }

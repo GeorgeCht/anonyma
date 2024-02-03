@@ -160,7 +160,7 @@ const MessageBubble = ({
             sentBy === 'anon'
               ? 'bg-gray text-light'
               : 'bg-light text-dark sm:max-w-[calc(100%-19px)]',
-            message === '' && sentBy !== 'anon' && 'sm:max-w-[calc(100%)]',
+            message === '' && sentBy !== 'anon' && 'sm:!max-w-[calc(100%)]',
             'flex flex-none px-5 py-5 mb-0 rounded-2xl transition-all max-w-[100%]'
           )}
           {...(message !== '' && sentBy !== 'anon' ? bindDoubleTap : {})}
