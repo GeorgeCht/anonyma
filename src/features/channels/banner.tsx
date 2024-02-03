@@ -12,12 +12,15 @@ import React from 'react'
 const ChannelBanner = ({
   title,
   tags,
+  access,
   className,
 }: {
   title: string
+  access?: string
   tags: Array<string>
   className?: string
 }) => {
+  access !== null && access !== undefined && tags.push(access)
   const { trimmedTags, remainingTags } = joinTagsAndTrim(tags, 28)
 
   return (
@@ -36,11 +39,16 @@ const ChannelBanner = ({
         /{title.toLowerCase()}
       </h3>
       <div className={'flex flex-row gap-1 mt-2'}>
-        {trimmedTags.map((tag, index) => (
-          <Badge className={'cursor-pointer'} key={index}>
-            {tag}
-          </Badge>
-        ))}
+        {tags.length > 0 &&
+          trimmedTags.map((tag, index) => {
+            return (
+              tag !== '' && (
+                <Badge className={'cursor-pointer'} key={index}>
+                  {tag}
+                </Badge>
+              )
+            )
+          })}
         {remainingTags && remainingTags.length > 0 ? (
           <Tooltip delayDuration={250}>
             <TooltipTrigger>

@@ -27,7 +27,7 @@ export async function newChannel(
     })
 
     // Get tags as array
-    const tagsArray = tags?.split(',') || ['']
+    const tagsArray = tags?.length! > 0 ? tags?.split(',') || [''] : []
 
     // Get access type
     const accessType = access === 'private' ? 'private' : 'public'
@@ -89,24 +89,25 @@ export async function newChannel(
     }
 
     // For each tag, add it to sorted set and renew expiration
-    channelData.tags.forEach(async (tag) => {
-      await db.zadd(`tag:${tag.toLowerCase()}`, {
-        score: Date.now(),
-        member: channelId,
+    tagsArray.length > 0 &&
+      channelData.tags.forEach(async (tag) => {
+        await db.zadd(`tag:${tag.toLowerCase()}`, {
+          score: Date.now(),
+          member: channelId,
+        })
+        // TODO: Check if tag name is permanent. if so, dont expire it
+        await db.expire(
+          `tag:${tag.toLowerCase()}`,
+          eval(process.env.EXPIRATION) as number
+        )
       })
-      // TODO: Check if tag name is stapple. if so, dont expire it
-      await db.expire(
-        `tag:${tag.toLowerCase()}`,
-        eval(process.env.EXPIRATION) as number
-      )
-    })
 
     // Add extra tag with channel name for searchability
     await db.zadd(`tag:${name.toLowerCase()}`, {
       score: Date.now(),
       member: channelId,
     })
-    // TODO: Check if tag name is stapple. if so, dont expire it
+    // TODO: Check if tag name is permanent. if so, dont expire it
     await db.expire(
       `tag:${name.toLowerCase()}`,
       eval(process.env.EXPIRATION) as number

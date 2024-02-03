@@ -12,28 +12,28 @@ export const newChannelSchema = z
           'Invalid channel name. Only only letters, numbers, underscores, and hyphens allowed.',
       }),
     tags: z
-      .string({
-        required_error: 'At least one tag is required.',
-      })
+      .string()
       .superRefine((tags, ctx) => {
-        const tagsArray = tags.split(',')
-        if (tagsArray.every((tag) => tag.length <= 3)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'Tags must be at least 3 characters.',
-          })
-        }
-        if (tagsArray.every((tag) => tag.length >= 24)) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: 'Tags cannot exceed 24 characters.',
-          })
-        }
-        if (tagsArray.every((tag) => tag.toLowerCase() === 'public')) {
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message: "Tag 'public' cannot be used.",
-          })
+        if (tags.length > 0) {
+          const tagsArray = tags.split(',')
+          if (tagsArray.every((tag) => tag.length <= 3)) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Tags must be at least 3 characters.',
+            })
+          }
+          if (tagsArray.every((tag) => tag.length >= 24)) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: 'Tags cannot exceed 24 characters.',
+            })
+          }
+          if (tagsArray.every((tag) => tag.toLowerCase() === 'public')) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: "Tag 'public' cannot be used.",
+            })
+          }
         }
       })
       .nullable(),

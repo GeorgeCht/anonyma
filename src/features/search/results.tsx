@@ -30,6 +30,7 @@ const SearchResults = () => {
             key={index}
             title={result.name}
             className={'mt-1'}
+            access={result.access}
             tags={result.tags!}
           />
         ))
