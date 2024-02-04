@@ -8,7 +8,7 @@ import React, {
   Suspense,
 } from 'react'
 
-import Opaque from './opaque'
+import Opaque from '../motion/opaque'
 import Logo from '@/features/essentials/logo'
 import Button from '@/components/ui/elements/button'
 import KeyboardKeys from '@/components/ui/elements/keyboard-keys'

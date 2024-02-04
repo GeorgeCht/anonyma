@@ -1,6 +1,6 @@
+import React from 'react'
 import useSettings from '@/stores/settings'
 import clsx from 'clsx'
-import React from 'react'
 import { useDoubleTap } from 'use-double-tap'
 
 const MessageAnnouncement = ({
@@ -67,7 +67,7 @@ const MessageAnnouncement = ({
             ulClass,
             'flex flex-col w-full sticky z-[29] transition-all bg-dark pb-2 after:inline-flex',
             'after:-bottom-3 after:absolute after:-mb-3 after:bg-gradient-to-b after:from-dark',
-            'after:content-empty after:w-full after:h-6'
+            'after:content-empty after:w-full after:h-6',
           )}
         >
           <AnnounementBubble />

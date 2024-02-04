@@ -2,10 +2,10 @@
 
 import React, { Suspense } from 'react'
 
-import { InnerSection } from '@/components/layout'
 import { getChannelByName } from '@/app/actions/get-channel-by-name'
 import { userSession } from '@/app/actions/session'
 import { getChatInitialMessages } from '@/app/actions/get-messages-action'
+import { InnerSection } from '@/components/misc'
 import { notFound, redirect } from 'next/navigation'
 
 import MessageInput from '@/features/messages/input'

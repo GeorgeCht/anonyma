@@ -2,11 +2,13 @@
 
 import React, { Suspense } from 'react'
 
-import { Footer, InnerSection } from '@/components/layout'
+import { Footer } from '@/components/layout'
 import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import * as Heading from '@/components/ui/headings'
 import { Button } from '@/components/ui/elements'
+import { InnerSection } from '@/components/misc'
+
+import * as Heading from '@/components/ui/headings'
 
 export default function NotFoundPage() {
   const pathname = usePathname()

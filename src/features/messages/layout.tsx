@@ -5,13 +5,13 @@ import React, { useEffect, useState } from 'react'
 import Chat from '@/features/messages/chat'
 import MessageAnnouncement from '@/features/messages/announcement'
 import ChannelHeader from '@/features/channels/header'
-
-import { StickyHeader } from '@/components/layout'
-import { pusherClient } from '@/lib/pusher'
-import { toPusherKey } from '@/lib/utils'
 import useMessages from '@/stores/messages'
 import LoadMoreMessages from './load-more'
 import useSettings from '@/stores/settings'
+
+import { pusherClient } from '@/lib/pusher'
+import { toPusherKey } from '@/lib/utils'
+import { StickyHeader } from '@/components/misc'
 
 const MessageLayout = ({
   messages,
@@ -42,7 +42,7 @@ const MessageLayout = ({
 
     // Get live message updates
     const chatChannel = pusherClient.subscribe(
-      toPusherKey(`channel:${channel.id}:messages`)
+      toPusherKey(`channel:${channel.id}:messages`),
     )
 
     // Presence channel
@@ -50,7 +50,7 @@ const MessageLayout = ({
       'pusher:subscription_count',
       (data: { subscription_count: number }) => {
         setPresenceCount(data?.subscription_count)
-      }
+      },
     )
 
     // Messages handler

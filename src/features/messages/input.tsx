@@ -18,7 +18,7 @@ const MessageInput = ({ id }: Pick<Channel, 'id'>) => {
   const { pending } = useFormStatus()
   const [state, formAction] = useFormState<ActionResponseState, FormData>(
     sendMessage,
-    null
+    null,
   )
   useEffect(() => {
     if (!state) {

@@ -1,10 +1,11 @@
-import clsx from 'clsx'
 import React from 'react'
+import clsx from 'clsx'
 import MessageBubble from './bubble'
-import { motion as Motion } from 'framer-motion'
 import MessageAnnouncement from './announcement'
 import useSettings from '@/stores/settings'
+
 import { filterUnsentMessages, sortMessagesByTimestamp } from '@/lib/utils'
+import { motion as Motion } from 'framer-motion'
 
 const Messages = React.forwardRef<
   React.ElementRef<typeof Motion.ul>,

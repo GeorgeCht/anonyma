@@ -1,8 +1,7 @@
 'use server'
 
 import React, { Suspense } from 'react'
-
-import { PageSection, StickyHeader } from '@/components/layout'
+import { PageSection, StickyHeader } from '@/components/misc'
 import MainHeading from '@/components/ui/headings/main'
 
 export default async function Page({ params }: { params: { key: string } }) {

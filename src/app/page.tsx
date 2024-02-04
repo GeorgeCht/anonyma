@@ -9,6 +9,7 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import Button from '@/components/ui/elements/button'
 import Marquee from 'react-fast-marquee'
+
 import * as Landing from '@/features/landing'
 
 const HomePage = () => {
@@ -69,7 +70,7 @@ const HomePage = () => {
           }
           className={clsx(
             'mix-blend-multiply absolute bottom-0 opacity-0 landing--img',
-            'right-[calc(50%-200px)] sm:right-[calc(50%-630px)] z-[1]'
+            'right-[calc(50%-200px)] sm:right-[calc(50%-630px)] z-[1]',
           )}
         />
         <Landing.BlurFX />

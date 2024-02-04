@@ -1,31 +1,17 @@
 'use client'
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from '@/components/shadcn/carousel'
-import { type CarouselApi } from '@/components/shadcn/carousel'
-import Autoplay from 'embla-carousel-autoplay'
-
-import React, {
-  FC,
-  Suspense,
-  useCallback,
-  useContext,
-  useLayoutEffect,
-} from 'react'
-import * as Search from '@/features/search'
+import React, { Suspense } from 'react'
 
 import { useSearchParams } from 'next/navigation'
-
-import DotIcon from '@/components/ui/icons/dot-icon'
-import ActionsDropdown from '@/features/dropdowns/actions-dropdown'
-import { Footer, PageSection, StickyHeader } from '@/components/layout'
+import { Footer } from '@/components/layout'
+import { PageSection, StickyHeader } from '@/components/misc'
 
 import * as Dialog from '@/features/dialogs'
 import * as Channels from '@/features/channels'
+import * as Search from '@/features/search'
 
+import DotIcon from '@/components/ui/icons/dot-icon'
+import ActionsDropdown from '@/features/dropdowns/actions-dropdown'
 import SubHeading from '@/components/ui/headings/sub'
 import MainHeading from '@/components/ui/headings/main'
 import ChannelBanner from '@/features/channels/banner'

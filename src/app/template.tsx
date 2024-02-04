@@ -1,9 +1,8 @@
 'use client'
 
-import { useEffect } from 'react'
-import { TransitionLayout } from '@/components/layout/'
+import React, { useEffect } from 'react'
 import { motion as Motion } from 'framer-motion'
-import React from 'react'
+import { TransitionLayout } from '@/components/motion'
 
 export default function Template({ children }: { children: React.ReactNode }) {
   // Prevent mobile zoom in

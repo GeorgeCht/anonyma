@@ -5,10 +5,10 @@ import LenisProvider from '../features/essentials/lenis'
 import Header from '../components/layout/header'
 import { TooltipProvider } from '@/components/shadcn/tooltip'
 import { Toaster } from '@/components/shadcn/sonner'
-import { Body } from '@/components/layout'
-import HtmlTag from '@/components/misc/html-tag'
+import { HtmlTag } from '@/components/misc'
 import { Suspense } from 'react'
 import { extractDomainAndExt } from '@/lib/utils'
+import { Body } from '@/components/misc'
 
 // Get name from enviroment var
 const getDomain = extractDomainAndExt(process.env.NEXT_PUBLIC_DOMAIN)

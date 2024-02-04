@@ -2,11 +2,12 @@
 
 import React, { Suspense } from 'react'
 
-import { Footer, InnerSection } from '@/components/layout'
+import { Footer } from '@/components/layout'
 import { useRouter } from 'next/navigation'
 
 import * as Heading from '@/components/ui/headings'
 import { Button } from '@/components/ui/elements'
+import { InnerSection } from '@/components/misc'
 
 export default function NotFoundPage() {
   const router = useRouter()
