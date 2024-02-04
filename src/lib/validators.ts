@@ -16,10 +16,10 @@ export const newChannelSchema = z
       .superRefine((tags, ctx) => {
         if (tags.length > 0) {
           const tagsArray = tags.split(',')
-          if (tagsArray.every((tag) => tag.length <= 3)) {
+          if (tagsArray.every((tag) => tag.length <= 2)) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
-              message: 'Tags must be at least 3 characters.',
+              message: 'Tags must be at least 2 characters.',
             })
           }
           if (tagsArray.every((tag) => tag.length >= 24)) {
@@ -53,7 +53,7 @@ export const newChannelSchema = z
     },
     {
       message: 'Password should be empty.',
-    }
+    },
   )
 
 export type NewChannelSchemaType = z.infer<typeof newChannelSchema>
@@ -67,7 +67,7 @@ export const editAnnouncementSchema = z.object({
       /^[a-zA-Z0-9_,.\s!@#$%^&*()_\-+=/?\\[\]]+(?:,[a-zA-Z0-9_,.\s!@#$%^&*()_\-+=/?\\[\]]+)*$/,
       {
         message: 'Invalid announcement name.',
-      }
+      },
     )
     .superRefine((announcement, ctx) => {
       const string = announcement.toLowerCase()

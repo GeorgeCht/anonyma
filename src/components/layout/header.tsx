@@ -90,8 +90,8 @@ const Header = () => {
       document.getElementById('trigger--settings-dialog')?.click()
   })
 
-  // Shft + n shortcut handler
-  useKeyboardShortcut(['shift', 'n'], () => {
+  // Alt + n shortcut handler
+  useKeyboardShortcut(['alt', 'n'], () => {
     const dialogueElement = document.querySelector('[role="dialog"]')
     dialogueElement !== null ||
       document.getElementById('trigger--new-channel-dialog')?.click()
@@ -212,7 +212,7 @@ const Header = () => {
                 <div className={'flex justify-end items-center flex-row gap-4'}>
                   <KeyboardKeys
                     className={'min-[1280px]:flex hidden'}
-                    keys={['Shft', '+', 'N']}
+                    keys={['Alt', '+', 'N']}
                   />
                   <Button
                     className={'hidden lg:inline-flex'}

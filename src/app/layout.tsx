@@ -6,7 +6,7 @@ import Header from '../components/layout/header'
 import { TooltipProvider } from '@/components/shadcn/tooltip'
 import { Toaster } from '@/components/shadcn/sonner'
 import { Body } from '@/components/layout'
-import HtmlTag from '@/components/layout/html-tag'
+import HtmlTag from '@/components/misc/html-tag'
 import { Suspense } from 'react'
 
 const sans = localFont({

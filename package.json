@@ -1,13 +1,35 @@
 {
   "name": "anonyma",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "config": "node --env-file=.env.local anonyma.config.mjs"
+    "config": "node --env-file=.env.local anonyma.mjs",
+    "prepare": "node .husky/install.mjs",
+    "commit": "node .husky/commit.js"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E  HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "subject-case": [
+        2,
+        "never",
+        [
+          "start-case",
+          "pascal-case"
+        ]
+      ]
+    }
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -52,6 +74,8 @@
     "zustand": "^4.5.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.6.0",
+    "@commitlint/config-conventional": "^18.6.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -65,6 +89,7 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^9.0.10",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"

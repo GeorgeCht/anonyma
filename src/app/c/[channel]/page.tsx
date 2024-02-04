@@ -9,7 +9,7 @@ import { getChatInitialMessages } from '@/app/actions/get-messages-action'
 import { notFound, redirect } from 'next/navigation'
 
 import MessageInput from '@/features/messages/input'
-import ChannelDialogs from '@/components/layout/channel-dialogs'
+import ChannelDialogs from '@/components/misc/channel-dialogs'
 import MessageLayout from '@/features/messages/layout'
 
 export default async function Page({
