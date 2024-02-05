@@ -13,6 +13,13 @@ const ChannelDialogs = () => {
           aria-hidden
         />
       </Dialog.NewChannel>
+      <Dialog.ChannelPassword>
+        <button
+          id={'trigger--channel-password-dialog'}
+          className={'hidden'}
+          aria-hidden
+        />
+      </Dialog.ChannelPassword>
       <Dialog.EditChannel>
         <button
           id={'trigger--edit-channel-dialog'}

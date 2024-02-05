@@ -65,6 +65,7 @@ const NewChannel = ({ children }: { children: React.ReactNode }) => {
       toast.error(state.message)
     }
     if (state.status === 'success') {
+      // TODO: If channel has password, add it to zustand store
       setDialogOpen(false)
       toast.success(state.message)
       reset()

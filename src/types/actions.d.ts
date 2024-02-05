@@ -15,6 +15,23 @@ type ActionResponseState =
   | null
 
 // eslint-disable-next-line no-unused-vars
+type ExtendedActionResponseState<T = unknown> =
+  | {
+      status: 'success'
+      message: string
+      response: T
+    }
+  | {
+      status: 'error'
+      message: string
+      errors?: Array<{
+        path: string
+        message: string
+      }>
+    }
+  | null
+
+// eslint-disable-next-line no-unused-vars
 type DataResponseState<T> =
   | {
       status: 'success'

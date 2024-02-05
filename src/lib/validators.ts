@@ -161,3 +161,14 @@ export const createPermaChannelSchema = z.object({
 export type CreatePermaChannelSchemaType = z.infer<
   typeof createPermaChannelSchema
 >
+
+export const channelPasswordSchema = z.object({
+  channelId: z.string(),
+  password: z
+    .string()
+    .min(4, { message: 'Password must be at least 4 characters.' })
+    .max(32, { message: 'Password cannot exceed 32 characters.' })
+    .nullable(),
+})
+
+export type ChannelPasswordSchemaType = z.infer<typeof channelPasswordSchema>
