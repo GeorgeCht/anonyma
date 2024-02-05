@@ -15,7 +15,7 @@ class CustomError<T = string> extends Error {
 
 export async function editAnnouncement(
   prevState: ActionResponseState,
-  data: FormData
+  data: FormData,
 ) {
   try {
     const { name, announcement } = editAnnouncementSchema.parse({
@@ -43,7 +43,7 @@ export async function editAnnouncement(
     // Validate user is the creator of the channel
     if (channelData!.createdBy !== userSession.id)
       throw new CustomError(
-        'Unauthorized action. You cannot edit this channel.'
+        'Unauthorized action. You cannot edit this channel.',
       )
 
     // Desconstruct data
@@ -56,7 +56,6 @@ export async function editAnnouncement(
       announcement: announcement,
       createdBy: channel.createdBy,
       password: channel.password,
-      vector: channel.vector,
       access: channel.access,
       tags: channel.tags,
     } satisfies Channel
@@ -81,13 +80,13 @@ export async function editAnnouncement(
           })),
         } as ActionResponseState)
       : error instanceof CustomError
-      ? ({
-          status: 'error',
-          message: error.message,
-        } as ActionResponseState)
-      : ({
-          status: 'error',
-          message: 'Something went wrong. Please try again.',
-        } as ActionResponseState)
+        ? ({
+            status: 'error',
+            message: error.message,
+          } as ActionResponseState)
+        : ({
+            status: 'error',
+            message: 'Something went wrong. Please try again.',
+          } as ActionResponseState)
   }
 }
