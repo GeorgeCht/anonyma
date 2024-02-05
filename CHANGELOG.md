@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/GeorgeCht/anonyma/compare/v0.3.1...v0.4.0) (2024-02-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **private channels:** Private access channels are now available
+
+### ✨ Features
+
+* **private channels:** implemented private access channels, fixed channel password encryption ([94c4c77](https://github.com/GeorgeCht/anonyma/commit/94c4c7782183fa7704a5d0eb3f8f29f5d14e2d55))
+
 ### [0.3.1](https://github.com/GeorgeCht/anonyma/compare/v0.3.0...v0.3.1) (2024-02-05)
 
 
