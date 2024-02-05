@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/GeorgeCht/anonyma/compare/v0.2.9...v0.3.0) (2024-02-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* **permanentchannels:** Permanent channels and tags are now available.
+
+### ✨ Features
+
+* **permanentchannels:** implemented permanent channels and tags ([83e94b6](https://github.com/GeorgeCht/anonyma/commit/83e94b6bed1aef9224d6ca1aaccfff47f79c7bc0))
+
 ### [0.2.32](https://github.com/GeorgeCht/anonyma/compare/v0.2.5...v0.2.32) (2024-02-04)
 
 ### ♻️ Code Refactoring
