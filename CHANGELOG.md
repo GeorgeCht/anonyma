@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/GeorgeCht/anonyma/compare/v0.3.0...v0.3.1) (2024-02-05)
+
+
+### 🐛 Bug Fixes
+
+* typescript error fix ([0cd0d8e](https://github.com/GeorgeCht/anonyma/commit/0cd0d8e2dd84dcb1b2e7f40e17d457cab3cb5335))
+
 ## [0.3.0](https://github.com/GeorgeCht/anonyma/compare/v0.2.9...v0.3.0) (2024-02-05)
 
 
