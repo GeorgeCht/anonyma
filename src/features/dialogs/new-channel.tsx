@@ -29,8 +29,9 @@ import { NewChannelSchemaType, newChannelSchema } from '@/lib/validators'
 import { newChannel } from '@/app/actions/new-channel'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
-import clsx from 'clsx'
 import { Button, Clarification } from '@/components/ui/elements'
+
+import clsx from 'clsx'
 
 const NewChannel = ({ children }: { children: React.ReactNode }) => {
   const [tags, setTags] = useState<string | null>(null)
@@ -49,7 +50,7 @@ const NewChannel = ({ children }: { children: React.ReactNode }) => {
   const { ref, ...partialNameRegister } = register('name')
   const [state, formAction] = useFormState<ActionResponseState, FormData>(
     newChannel,
-    null
+    null,
   )
 
   const { pending } = useFormStatus()
@@ -124,7 +125,7 @@ const NewChannel = ({ children }: { children: React.ReactNode }) => {
                   'flex !w-full px-3 pb-1.5 pt-2 text-sm ring-offset-background file:border-0',
                   'file:bg-transparent file:text-sm file:font-medium placeholder:text-light/30',
                   'disabled:cursor-not-allowed disabled:opacity-50 !text-sm',
-                  'rounded-md bg-gray/90 border border-light/10'
+                  'rounded-md bg-gray/90 border border-light/10',
                 ),
               }}
             />
@@ -167,7 +168,7 @@ const NewChannel = ({ children }: { children: React.ReactNode }) => {
                       } else {
                         setValue('access', 'public')
                         reset(
-                          passwordRef.current?.value ? { password: '' } : {}
+                          passwordRef.current?.value ? { password: '' } : {},
                         )
                       }
                     }}

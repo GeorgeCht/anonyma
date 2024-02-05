@@ -11,7 +11,7 @@ export function cn(...inputs: Array<ClassValue>) {
 
 export function joinTagsAndTrim(
   tags: string[],
-  maxLength: number
+  maxLength: number,
 ): { trimmedTags: string[]; remainingTags: string[] | null } {
   const joinedTags = tags.join(', ') // Join the tags with a comma and a space
   const trimmedTags =
@@ -32,7 +32,7 @@ export function joinTagsAndTrim(
 
 export function generateUsername(
   adj: Array<string>,
-  noun: Array<string>
+  noun: Array<string>,
 ): string {
   let random = (array: string[]): string =>
     array[Math.floor(Math.random() * array.length)]
@@ -108,14 +108,14 @@ export interface Hash {
 
 export function encrypt<T extends boolean>(
   text: string,
-  options: { withServerVector: T }
+  options: { withServerVector: T },
 ) {
   const cipher = crypto.createCipheriv(
     'aes-256-cbc',
     Buffer.from(process.env.CIPHER_KEY, 'hex'),
     options.withServerVector
       ? Buffer.from(process.env.VECTOR_KEY, 'hex')
-      : crypto.randomBytes(16)
+      : crypto.randomBytes(16),
   )
 
   const encrypted = Buffer.concat([cipher.update(text), cipher.final()])
@@ -135,13 +135,13 @@ export function encrypt<T extends boolean>(
 
 export function decrypt<T extends boolean>(
   input: T extends true ? string : Hash,
-  options: { withServerVector: T }
+  options: { withServerVector: T },
 ): string {
   let encryptedText = Buffer.from(
     options.withServerVector
       ? (input as string)
       : (input as Hash).encryptedData,
-    'hex'
+    'hex',
   )
   let vector = options.withServerVector
     ? Buffer.from(process.env.VECTOR_KEY, 'hex')
@@ -149,7 +149,7 @@ export function decrypt<T extends boolean>(
   const decipher = crypto.createDecipheriv(
     'aes-256-cbc',
     Buffer.from(process.env.CIPHER_KEY, 'hex'),
-    vector
+    vector,
   )
   let decrypted = decipher.update(encryptedText)
   decrypted = Buffer.concat([decrypted, decipher.final()])
@@ -163,7 +163,7 @@ export function decrypt2(input: Hash) {
   let decipher = crypto.createDecipheriv(
     'aes-256-cbc',
     Buffer.from(Buffer.from(process.env.CIPHER_KEY, 'hex')),
-    vector
+    vector,
   )
   let decrypted = decipher.update(encryptedText)
   decrypted = Buffer.concat([decrypted, decipher.final()])
@@ -172,7 +172,7 @@ export function decrypt2(input: Hash) {
 
 export function sanitateTags(tags: Array<string>): Array<string> {
   return Array.from(
-    new Set<string>(tags.map((tag) => tag.trim().replace(/[^a-zA-Z0-9]/g, '')))
+    new Set<string>(tags.map((tag) => tag.trim().replace(/[^a-zA-Z0-9]/g, ''))),
   ).filter(Boolean)
 }
 
@@ -182,7 +182,7 @@ export function detectURLs(text: string) {
 }
 
 export function extractDomainAndExt(
-  url: string
+  url: string,
 ): { domain: string; ext: string } | null {
   const regex = /^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+)\.([a-zA-Z]{2,})$/
   const match = url.match(regex)
@@ -205,12 +205,17 @@ export function filterUnsentMessages(messages: Array<Message>): Array<Message> {
     .map((message) => message.id)
 
   return messages.filter((message) =>
-    duplicateIds.includes(message.id) ? message.message === '' : true
+    duplicateIds.includes(message.id) ? message.message === '' : true,
   )
 }
 
 export function sortMessagesByTimestamp(
-  messages: Array<Message>
+  messages: Array<Message>,
 ): Array<Message> {
   return messages.sort((a, b) => a.timestamp - b.timestamp)
+}
+
+export function timestampToHours(timestamp: number): string {
+  const hours = Math.floor(timestamp / (60 * 60))
+  return hours.toString().padStart(2, '0') + ' hours'
 }

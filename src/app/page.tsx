@@ -9,11 +9,13 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import Button from '@/components/ui/elements/button'
 import Marquee from 'react-fast-marquee'
+import useSettings from '@/stores/settings'
 
 import * as Landing from '@/features/landing'
 
 const HomePage = () => {
   const router = useRouter()
+  const { setToDefault } = useSettings()
   const motionItemUpper = {
     hidden: { opacity: 0 },
     show: {
@@ -45,6 +47,7 @@ const HomePage = () => {
 
   const imgRef = useRef<HTMLImageElement>(null)
   useEffect(() => {
+    setToDefault()
     const body = document.body
     body.classList.remove('bg--body-dark')
     body.classList.add('bg--body-gradient')

@@ -3,9 +3,6 @@
 import { db } from '@/lib/db'
 import { userSession } from './session'
 
-// TODO: https://github.com/kelektiv/node.bcrypt.js#readme
-// TODO: Encrypt the token for validation
-
 export async function authUser(userData: User) {
   const user = await db.get<User>(`user:${userData.id}`)
   if (user && user.token === userData.token) {

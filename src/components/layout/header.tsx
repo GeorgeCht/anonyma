@@ -56,7 +56,7 @@ const Header = () => {
       setHeaderColor('dark')
       headerDispatch({ type: 'SET_LOGO', payload: true })
       headerDispatch({ type: 'SET_LOGO_THEME', payload: 'light' })
-      headerDispatch({ type: 'SET_MIDDLE_STATE', payload: 'search' })
+      headerDispatch({ type: 'SET_MIDDLE_STATE', payload: 'inner-page' })
       headerDispatch({ type: 'SET_RIGHTSIDE', payload: false })
     }
 

@@ -7,6 +7,8 @@ import { encrypt } from '@/lib/utils'
 import { ZodError } from 'zod'
 import { newChannelSchema } from '@/lib/validators'
 
+import permanentTags from '@/lib/permanent_tags.json'
+
 class CustomError<T = string> extends Error {
   constructor(message: T) {
     super(message as string)
@@ -16,7 +18,7 @@ class CustomError<T = string> extends Error {
 
 export async function newChannel(
   prevState: ActionResponseState,
-  data: FormData
+  data: FormData,
 ) {
   try {
     const { name, tags, password, access } = newChannelSchema.parse({
@@ -34,7 +36,6 @@ export async function newChannel(
 
     // Init values
     let encryptedPassword = ''
-    let encryptedVector = ''
     const channelId = uniqueId()
 
     // Get user session
@@ -59,11 +60,10 @@ export async function newChannel(
     if (accessType === 'private') {
       // Check if password is valid
       if (!password || password.length < 4) return null
-      const { vector, encryptedData } = encrypt(password, {
-        withServerVector: false,
+      const encryptedData = encrypt(password, {
+        withServerVector: true,
       })
       encryptedPassword = encryptedData
-      encryptedVector = vector
     }
 
     // Create channel data
@@ -75,7 +75,6 @@ export async function newChannel(
       ).replace('{{USERNAME}}', userSession.name),
       createdBy: userSession.id,
       password: accessType === 'private' ? encryptedPassword : '',
-      vector: accessType === 'private' ? encryptedVector : '',
       access: accessType,
       tags: tagsArray || [],
     } satisfies Channel
@@ -88,30 +87,37 @@ export async function newChannel(
       channels: channels + 1,
     }
 
-    // For each tag, add it to sorted set and renew expiration
+    // Create expiration timestamp
+    const expirationDate = (Date.now() +
+      (eval(process.env.EXPIRATION) as number)) as number
+
+    // For each tag, persist it to sorted set and renew expiration
     tagsArray.length > 0 &&
       channelData.tags.forEach(async (tag) => {
         await db.zadd(`tag:${tag.toLowerCase()}`, {
           score: Date.now(),
           member: channelId,
         })
-        // TODO: Check if tag name is permanent. if so, dont expire it
-        await db.expire(
-          `tag:${tag.toLowerCase()}`,
-          eval(process.env.EXPIRATION) as number
-        )
+
+        !permanentTags.some((permanentTag) => tag.includes(permanentTag)) &&
+          (await db.expire(
+            `tag:${tag.toLowerCase()}`,
+            eval(process.env.EXPIRATION) as number,
+          ))
       })
 
-    // Add extra tag with channel name for searchability
+    // Extra tag with channel name for searchability
     await db.zadd(`tag:${name.toLowerCase()}`, {
       score: Date.now(),
       member: channelId,
     })
-    // TODO: Check if tag name is permanent. if so, dont expire it
-    await db.expire(
-      `tag:${name.toLowerCase()}`,
-      eval(process.env.EXPIRATION) as number
-    )
+    !permanentTags.some((permanentTag) =>
+      name.toLowerCase().includes(permanentTag),
+    ) &&
+      (await db.expire(
+        `tag:${name.toLowerCase()}`,
+        eval(process.env.EXPIRATION) as number,
+      ))
 
     await Promise.all([
       db.set(`channel:${id}`, JSON.stringify(channelData), {
@@ -121,6 +127,9 @@ export async function newChannel(
         ex: eval(process.env.EXPIRATION) as number,
       }),
       db.hset('channel_index', { [name.toLowerCase()]: channelId }),
+      db.hset('channel_index', {
+        [`${name.toLowerCase()}--expiration`]: expirationDate,
+      }),
     ])
     return {
       status: 'success',
@@ -137,13 +146,13 @@ export async function newChannel(
           })),
         } as ActionResponseState)
       : error instanceof CustomError
-      ? ({
-          status: 'error',
-          message: error.message,
-        } as ActionResponseState)
-      : ({
-          status: 'error',
-          message: 'Something went wrong. Please try again.',
-        } as ActionResponseState)
+        ? ({
+            status: 'error',
+            message: error.message,
+          } as ActionResponseState)
+        : ({
+            status: 'error',
+            message: 'Something went wrong. Please try again.',
+          } as ActionResponseState)
   }
 }

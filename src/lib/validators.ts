@@ -28,10 +28,16 @@ export const newChannelSchema = z
               message: 'Tags cannot exceed 24 characters.',
             })
           }
-          if (tagsArray.every((tag) => tag.toLowerCase() === 'public')) {
+          if (
+            tagsArray.every(
+              (tag) =>
+                tag.toLowerCase() === 'public' ||
+                tag.toLowerCase() === 'private',
+            )
+          ) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
-              message: "Tag 'public' cannot be used.",
+              message: 'Tag cannot be used.',
             })
           }
         }
@@ -108,3 +114,50 @@ export const messageSchema = z.object({
 })
 
 export type MessageSchemaType = z.infer<typeof messageSchema>
+
+export const createPermaChannelSchema = z.object({
+  authkey: z.string(),
+  name: z
+    .string()
+    .min(2, { message: 'Name must be at least 2 characters.' })
+    .max(24, { message: 'Name cannot exceed 24 characters.' })
+    .regex(/^[a-zA-Z0-9_-]+(?:,[a-zA-Z0-9_-]+)*$/, {
+      message:
+        'Invalid channel name. Only only letters, numbers, underscores, and hyphens allowed.',
+    }),
+  tags: z
+    .string()
+    .superRefine((tags, ctx) => {
+      if (tags.length > 0) {
+        const tagsArray = tags.split(',')
+        if (tagsArray.every((tag) => tag.length <= 2)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Tags must be at least 2 characters.',
+          })
+        }
+        if (tagsArray.every((tag) => tag.length >= 24)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Tags cannot exceed 24 characters.',
+          })
+        }
+        if (
+          tagsArray.every(
+            (tag) =>
+              tag.toLowerCase() === 'public' || tag.toLowerCase() === 'private',
+          )
+        ) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Tag cannot be used.',
+          })
+        }
+      }
+    })
+    .nullable(),
+})
+
+export type CreatePermaChannelSchemaType = z.infer<
+  typeof createPermaChannelSchema
+>

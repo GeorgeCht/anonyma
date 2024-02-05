@@ -13,9 +13,14 @@ interface Channel {
   announcement: string
   createdBy: string
   password: string
-  vector: string
   access: 'private' | 'public'
   tags?: Array<string>
+}
+
+// eslint-disable-next-line no-unused-vars
+interface ChannelIndexHash {
+  id: string
+  timestamp: number
 }
 
 // eslint-disable-next-line no-unused-vars

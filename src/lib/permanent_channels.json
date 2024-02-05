@@ -1,0 +1,214 @@
+[
+  {
+    "name": "anonyma",
+    "tags": [
+      "funny",
+      "humor",
+      "chat",
+      "channels",
+      "entertainment",
+      "random",
+      "laughter",
+      "jokes",
+      "comedy",
+      "hilarious",
+      "satire"
+    ]
+  },
+  {
+    "name": "general",
+    "tags": [
+      "technology",
+      "politics",
+      "news",
+      "chat",
+      "pics",
+      "entertainment",
+      "memes",
+      "gaming",
+      "community",
+      "discussion",
+      "events",
+      "internet",
+      "trending"
+    ]
+  },
+  {
+    "name": "funny",
+    "tags": [
+      "funny",
+      "humor",
+      "memes",
+      "entertainment",
+      "laughs",
+      "giggle",
+      "amusing",
+      "wit",
+      "comic",
+      "hilarity"
+    ]
+  },
+  {
+    "name": "anime",
+    "tags": [
+      "art",
+      "entertainment",
+      "animation",
+      "japanese",
+      "manga",
+      "otaku",
+      "cosplay",
+      "fantasy",
+      "comics",
+      "characters"
+    ]
+  },
+  {
+    "name": "animals",
+    "tags": [
+      "animals",
+      "entertainment",
+      "funny",
+      "advice",
+      "pets",
+      "cute",
+      "wildlife",
+      "petcare",
+      "adorable"
+    ]
+  },
+  {
+    "name": "games",
+    "tags": [
+      "game",
+      "games",
+      "gaming",
+      "entertainment",
+      "video",
+      "community",
+      "development",
+      "strategies",
+      "online",
+      "gameplay"
+    ]
+  },
+  {
+    "name": "politics",
+    "tags": [
+      "politics",
+      "news",
+      "government",
+      "analysis",
+      "elections",
+      "policy",
+      "international",
+      "debate",
+      "humor",
+      "political"
+    ]
+  },
+  {
+    "name": "sci-fi",
+    "tags": [
+      "science",
+      "technology",
+      "starwars",
+      "futuristic",
+      "aliens",
+      "timetravel",
+      "space",
+      "scifiart",
+      "cyberpunk",
+      "extraterrestrial"
+    ]
+  },
+  {
+    "name": "films",
+    "tags": [
+      "movies",
+      "entertainment",
+      "reviews",
+      "hollywood",
+      "indie",
+      "cinematography",
+      "festival",
+      "directors",
+      "classic"
+    ]
+  },
+  {
+    "name": "music",
+    "tags": [
+      "music",
+      "entertainment",
+      "genres",
+      "news",
+      "concerts",
+      "instruments",
+      "song",
+      "production",
+      "industry",
+      "artists"
+    ]
+  },
+  {
+    "name": "books",
+    "tags": [
+      "books",
+      "education",
+      "bookreviews",
+      "readinglist",
+      "literature",
+      "bookclub",
+      "authors",
+      "bestsellers",
+      "classics",
+      "bookquotes"
+    ]
+  },
+  {
+    "name": "food",
+    "tags": [
+      "food",
+      "travel",
+      "advice",
+      "cooking",
+      "tips",
+      "recipes",
+      "culinary",
+      "nutrition",
+      "restaurant"
+    ]
+  },
+  {
+    "name": "stocks",
+    "tags": [
+      "finance",
+      "stocks",
+      "bitcoin",
+      "crypto",
+      "strategies",
+      "economics",
+      "market",
+      "analysis",
+      "trading",
+      "financialnews",
+      "investment"
+    ]
+  },
+  {
+    "name": "crypto",
+    "tags": [
+      "crypto",
+      "bitcoin",
+      "finance",
+      "blockchain",
+      "news",
+      "altcoins",
+      "cryptoanalysis",
+      "digital",
+      "wallets",
+      "decentralized"
+    ]
+  }
+]

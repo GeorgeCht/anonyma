@@ -21,6 +21,7 @@ declare namespace NodeJS {
     MAX_CHANNELS: number
 
     DEFAULT_CHANNEL_ANNOUNCEMENT: string
+    PERMANENT_CHANNEL_ANNOUNCEMENT: string
     NEXT_PUBLIC_LIMIT_MESSAGES: number
   }
 }

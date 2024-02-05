@@ -1,11 +1,13 @@
 import chalk from 'chalk'
 import crypto from 'crypto'
 
+import * as permanentChannels from './src/lib/permanent_channels.json'
+
 function encrypt(text) {
   const cipher = crypto.createCipheriv(
     'aes-256-cbc',
     Buffer.from(process.env.CIPHER_KEY, 'hex'),
-    Buffer.from(process.env.VECTOR_KEY, 'hex')
+    Buffer.from(process.env.VECTOR_KEY, 'hex'),
   )
   const encrypted = Buffer.concat([cipher.update(text), cipher.final()])
   return encrypted.toString('hex')
@@ -20,6 +22,14 @@ function logGreenOutput(descr, value) {
   return
 }
 
+function getTagsFromPermaChannels() {
+  return [
+    ...new Set(
+      permanentChannels.reduce((acc, channel) => acc.concat(channel.tags), []),
+    ),
+  ]
+}
+
 // Check if arguments are provided
 const args = process.argv.slice(2)
 
@@ -29,7 +39,7 @@ if (args.length === 0) {
     chalk.bgGreenBright.black('npm run config generate'),
     chalk.greenBright('for new secret env variables.\nOr'),
     chalk.bgGreenBright.black('npm run config get-key'),
-    chalk.greenBright('for accessing the admin config key.')
+    chalk.greenBright('for accessing the admin config key.'),
   )
   process.exit(1)
 }
