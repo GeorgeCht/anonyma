@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.1](https://github.com/GeorgeCht/anonyma/compare/v0.5.0...v0.5.1) (2024-02-06)
+
+
+### ✅ Testing
+
+* **ui:** added some UI elements test ([bc56363](https://github.com/GeorgeCht/anonyma/commit/bc563637af2e1354acc647c296019d4614a4d3f6))
+
+
+### 🐛 Bug Fixes
+
+* **search channel query:** fixed search channel query results now only return name, tags and access ([42f092d](https://github.com/GeorgeCht/anonyma/commit/42f092d0c0104a444e5d8d5c1e7970660b7195a3))
+
 ## [0.5.0](https://github.com/GeorgeCht/anonyma/compare/v0.4.3...v0.5.0) (2024-02-06)
 
 
