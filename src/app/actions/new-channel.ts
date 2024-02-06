@@ -118,6 +118,8 @@ export async function newChannel(
       score: Date.now(),
       member: channelId,
     })
+
+    // Persist tags in db
     !permanentTags.some((permanentTag) =>
       name.toLowerCase().includes(permanentTag),
     ) &&

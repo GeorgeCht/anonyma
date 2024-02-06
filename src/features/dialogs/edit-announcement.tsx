@@ -48,7 +48,7 @@ const EditAnnouncement = ({ children }: { children: React.ReactNode }) => {
   const { pending } = useFormStatus()
   const [state, formAction] = useFormState<ActionResponseState, FormData>(
     editAnnouncement,
-    null
+    null,
   )
   const { onChange, ...partialRegister } = register('announcement')
   useEffect(() => {
@@ -74,7 +74,7 @@ const EditAnnouncement = ({ children }: { children: React.ReactNode }) => {
           const canEdit = await isChannelCreator(pathname.substring(3))
           if (canEdit === true) setCanEditChannel(true)
           const currentChannelData = await getChannelByName(
-            pathname.substring(3)
+            pathname.substring(3),
           )
           if (currentChannelData?.status === 'success')
             setAnnouncement(currentChannelData.response.announcement)
@@ -100,7 +100,7 @@ const EditAnnouncement = ({ children }: { children: React.ReactNode }) => {
               <DialogHeader>
                 <DialogTitle>Announcement</DialogTitle>
               </DialogHeader>
-              <DialogBody className={'min-h-44'}>
+              <DialogBody className={'!min-h-44'}>
                 <DialogLabelTitle className={'pt-4'}>
                   Announcement text
                 </DialogLabelTitle>

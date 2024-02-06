@@ -121,7 +121,7 @@ const NewChannel = ({ children }: { children: React.ReactNode }) => {
 
             <DialogLabelTitle>Channel tags</DialogLabelTitle>
             <DialogLabelDescription className={'-mt-2'}>
-              Add descriptive tags for others to find it
+              Add or remove descriptive tags for others to find your channel
             </DialogLabelDescription>
             <TagsInput
               disabled={pending}

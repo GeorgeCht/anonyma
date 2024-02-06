@@ -41,6 +41,7 @@ export const queryCommunityChannels = async () => {
 
         // Get the channel data
         const channel = await getChannelById(id)
+        if (!channel || channel.status === 'error') return []
 
         // Deconstruct channel data
         const {
@@ -48,7 +49,7 @@ export const queryCommunityChannels = async () => {
           tags: channelTags,
           access: channelAccess,
           ...rest
-        } = channel
+        } = channel.response
 
         // Push 'em to response data
         channelData &&

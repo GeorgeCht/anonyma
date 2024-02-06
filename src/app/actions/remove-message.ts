@@ -3,8 +3,7 @@
 import { db } from '@/lib/db'
 import { userSession as session } from './session'
 import { ZodError } from 'zod'
-import { toPusherKey, uniqueId } from '@/lib/utils'
-import { encrypt } from '@/lib/utils'
+import { toPusherKey } from '@/lib/utils'
 import { pusherServer } from '@/lib/pusher'
 import { messageSchema } from '@/lib/validators'
 

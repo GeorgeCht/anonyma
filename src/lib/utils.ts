@@ -157,20 +157,6 @@ export function decrypt<T extends boolean>(
   return decrypted.toString()
 }
 
-// Decrypting text
-export function decrypt2(input: Hash) {
-  let vector = Buffer.from(input.vector, 'hex')
-  let encryptedText = Buffer.from(input.encryptedData, 'hex')
-  let decipher = crypto.createDecipheriv(
-    'aes-256-cbc',
-    Buffer.from(Buffer.from(process.env.CIPHER_KEY, 'hex')),
-    vector,
-  )
-  let decrypted = decipher.update(encryptedText)
-  decrypted = Buffer.concat([decrypted, decipher.final()])
-  return decrypted.toString()
-}
-
 export function sanitateTags(tags: Array<string>): Array<string> {
   return Array.from(
     new Set<string>(tags.map((tag) => tag.trim().replace(/[^a-zA-Z0-9]/g, ''))),
@@ -236,4 +222,29 @@ export function censorExpletives(input: string): string {
       }
     })
     .join(' ')
+}
+
+export function isEqualSet<T>(set1: Set<T>, set2: Set<T>): boolean {
+  return set1.size !== set2.size
+    ? false
+    : Array.from(set1).every((item) => set2.has(item))
+}
+
+export function compareTags(
+  oldTags: Array<string>,
+  newTags: Array<string>,
+): { tagsToDelete: Array<string>; tagsToCreate: Array<string> } | false {
+  const oldTagsSet = new Set(oldTags.slice().sort())
+  const newTagsSet = new Set(newTags.slice().sort())
+
+  return isEqualSet(oldTagsSet, newTagsSet)
+    ? false
+    : {
+        tagsToDelete: Array.from(oldTagsSet).filter(
+          (tag) => !newTagsSet.has(tag),
+        ),
+        tagsToCreate: Array.from(newTagsSet).filter(
+          (tag) => !oldTagsSet.has(tag),
+        ),
+      }
 }

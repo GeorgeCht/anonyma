@@ -22,10 +22,10 @@ export async function authChannelPassword(data: ChannelPasswords) {
 
     // Get channel data
     const channelData = await getChannelById(channelId)
-    if (!channelData) return null
+    if (!channelData || channelData.status === 'error') return null
 
     // Compare input password with db password
-    if (channelData.password !== password) return null
+    if (channelData.response.password !== password) return null
 
     return true
   } catch (error) {

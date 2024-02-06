@@ -94,7 +94,7 @@ const ChannelPassword = ({ children }: { children: React.ReactNode }) => {
           <DialogHeader>
             <DialogTitle>Access channel</DialogTitle>
           </DialogHeader>
-          <DialogBody className={'min-h-24'}>
+          <DialogBody className={'!min-h-24'}>
             <Input
               placeholder={'Channel name'}
               autoComplete={'off'}

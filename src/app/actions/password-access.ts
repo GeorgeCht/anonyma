@@ -51,17 +51,18 @@ export async function channelPasswordAccess(
 
     // Get channel data
     const channelData = await getChannelById(channelId)
-    if (!channelData) throw new CustomError('Invalid channel.')
+    if (!channelData || channelData.status === 'error')
+      throw new CustomError('Invalid channel.')
 
     // Compare input password with db password
-    if (channelData.password !== encryptedPassword)
+    if (channelData.response.password !== encryptedPassword)
       throw new CustomError('Invalid password.')
 
     return {
       status: 'success',
       response: {
         channelId: channelId,
-        channelName: channelData.name,
+        channelName: channelData.response.name,
         password: encryptedPassword,
       } as ChannelPasswordResponse,
       message: 'Access granted.',

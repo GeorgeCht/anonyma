@@ -5,6 +5,7 @@ import { userSession as session } from './session'
 import { ZodError } from 'zod'
 import { editAnnouncementSchema } from '@/lib/validators'
 import { getChannelByName } from './get-channel-by-name'
+import { revalidatePath } from 'next/cache'
 
 class CustomError<T = string> extends Error {
   constructor(message: T) {
@@ -64,6 +65,9 @@ export async function editAnnouncement(
     await Promise.all([
       db.set(`channel:${channel.id}`, JSON.stringify(mutatedChannel)),
     ])
+
+    // Purge cached data
+    revalidatePath(`/c/${channel.name}`)
 
     return {
       status: 'success',
