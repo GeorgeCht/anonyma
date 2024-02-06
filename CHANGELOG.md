@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/GeorgeCht/anonyma/compare/v0.4.0...v0.4.1) (2024-02-06)
+
+
+### ✨ Features
+
+* imporved private channel creation UX. Implemented React Query ([12efd87](https://github.com/GeorgeCht/anonyma/commit/12efd879a8da0125a69bf2af26fde423ccaf9bde))
+
 ## [0.4.0](https://github.com/GeorgeCht/anonyma/compare/v0.3.1...v0.4.0) (2024-02-05)
 
 
