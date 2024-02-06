@@ -4,6 +4,7 @@ import HtmlTag from './html-tag'
 import InnerSection from './inner-section'
 import PageSection from './page-section'
 import StickyHeader from './sticky-header'
+import noSsr from './no-ssr'
 
 export {
   Body,
@@ -12,4 +13,5 @@ export {
   InnerSection,
   PageSection,
   StickyHeader,
+  noSsr as NonSSR,
 }

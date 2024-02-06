@@ -10,6 +10,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import React, { useEffect } from 'react'
 import clsx from 'clsx'
 import ChannelCard from './card'
+import { NonSSR } from '@/components/misc'
 
 interface Channel {
   title: string
@@ -27,7 +28,7 @@ const ChannelCarousel = ({
 }) => {
   const [api, setApi] = React.useState<CarouselApi>()
   const plugin = React.useRef(
-    Autoplay({ delay: autoplayDelay, stopOnInteraction: true })
+    Autoplay({ delay: autoplayDelay, stopOnInteraction: true }),
   )
 
   useEffect(() => {
@@ -48,18 +49,23 @@ const ChannelCarousel = ({
       onMouseLeave={plugin.current.reset}
       className={clsx(
         'w-full sm:max-w-prefered max-w-[calc(100vw-32px)]',
-        className
+        className,
       )}
       data-fade-left
       data-fade-right
     >
-      <CarouselContent>
-        {channels.map((channel) => (
-          <CarouselItem className={'basis-[218px] p-[2px]'} key={channel.title}>
-            <ChannelCard title={channel.title} tags={channel.tags} />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
+      <NonSSR>
+        <CarouselContent>
+          {channels.map((channel) => (
+            <CarouselItem
+              className={'basis-[218px] p-[2px]'}
+              key={channel.title}
+            >
+              <ChannelCard title={channel.title} tags={channel.tags} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </NonSSR>
     </Carousel>
   )
 }

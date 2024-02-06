@@ -76,7 +76,7 @@ const MessageBubble = ({
       onClick={handleClick}
       className={clsx(
         sentBy === 'anon' ? 'flex-row' : 'flex-row-reverse',
-        'group flex relative w-full items-center justify-between gap-1 sm:gap-4'
+        'group flex relative w-full items-center justify-between gap-1 sm:gap-4',
       )}
     >
       <div
@@ -84,7 +84,7 @@ const MessageBubble = ({
           'flex flex-row flex-none items-center gap-3',
           message === ''
             ? 'max-w-[100%] sm:max-w-[100%]'
-            : 'max-w-[100%] sm:max-w-[80%]'
+            : 'max-w-[100%] sm:max-w-[80%]',
         )}
       >
         {sentBy === 'user' && message !== '' && (
@@ -103,7 +103,7 @@ const MessageBubble = ({
                   </DrawerDescription>
                 </DrawerHeader>
                 <DrawerFooter
-                  className={'itmes-center justify-between mx-auto pb-16'}
+                  className={'items-center justify-between mx-auto pb-16'}
                 >
                   <Button intent={'fit'} size={'lg'}>
                     Confirm
@@ -161,7 +161,7 @@ const MessageBubble = ({
               ? 'bg-gray text-light'
               : 'bg-light text-dark sm:max-w-[calc(100%-19px)]',
             message === '' && sentBy !== 'anon' && 'sm:!max-w-[calc(100%)]',
-            'flex flex-none px-5 py-5 mb-0 rounded-2xl transition-all max-w-[100%]'
+            'flex flex-none px-5 py-5 mb-0 rounded-2xl transition-all max-w-[100%]',
           )}
           {...(message !== '' && sentBy !== 'anon' ? bindDoubleTap : {})}
         >
@@ -181,7 +181,7 @@ const MessageBubble = ({
           className={clsx(
             'text--body-sm transition-opacity opacity-0',
             'group-hover:opacity-0 sm:group-hover:opacity-100',
-            'text-light/30 flex-none max-w-[20%] text-end'
+            'text-light/30 flex-none max-w-[20%] text-end',
           )}
         >
           {timeAgo(timestamp)}

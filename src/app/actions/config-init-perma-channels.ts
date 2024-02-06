@@ -21,7 +21,7 @@ export async function initPermanentChannel(authkey: string) {
     // Loop every perma channel data
     permanentChannels.forEach(async (permaChannel) => {
       // Check if channel name is available
-      if (await db.hexists('channel_index', permaChannel.name.toLowerCase()))
+      if (await db.hexists('channel_index', permaChannel.title.toLowerCase()))
         throw new CustomError('A channel with this name already exists.')
 
       // Init id value
@@ -30,7 +30,7 @@ export async function initPermanentChannel(authkey: string) {
       // Create channel data
       const channel = {
         id: channelId,
-        name: permaChannel.name.toLowerCase(),
+        name: permaChannel.title.toLowerCase(),
         announcement: (
           process.env.PERMANENT_CHANNEL_ANNOUNCEMENT as string
         ).replace(
@@ -59,7 +59,7 @@ export async function initPermanentChannel(authkey: string) {
       await Promise.all([
         db.set(`channel:${id}`, JSON.stringify(channelData)),
         db.hset('channel_index', {
-          [permaChannel.name.toLowerCase()]: channelId,
+          [permaChannel.title.toLowerCase()]: channelId,
         }),
       ])
     })

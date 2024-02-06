@@ -18,24 +18,26 @@ const ChannelCard = ({
 
   return (
     <Link
+      suppressHydrationWarning
       className={clsx(
         theme === 'accent' &&
           'bg-gradient-to-tl from-accent-primary to-accent-secondary mt-[1px]',
         theme === 'light' && 'bg-light border-transparent border',
         theme === 'dark' &&
           'bg-gray border-light/10 border hover:border-light/15',
-        'block p-[8px] rounded-md transition-colors'
+        'block p-[8px] rounded-md transition-colors',
       )}
       href={`/c/${title.toLowerCase()}`}
     >
       <h3
+        suppressHydrationWarning
         className={clsx(
           theme === 'accent' && 'text-dark',
           theme === 'light' && 'text-dark',
           theme === 'dark' && 'text-light',
           variant === 'lg' && 'pt-[23.333vw] sm:pt-24',
           variant === 'sm' && 'pt-8 sm:pt-12',
-          'text--body-2xl max-w-[218px] w-[218px]'
+          'text--body-2xl max-w-[218px] w-[218px]',
         )}
       >
         /{title.toLowerCase()}

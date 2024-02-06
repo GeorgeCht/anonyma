@@ -14,7 +14,7 @@ export const badgeVariants = cva(
     defaultVariants: {
       variant: 'light',
     },
-  }
+  },
 )
 
 export interface BadgeProps
@@ -39,7 +39,7 @@ const Badge: FC<BadgeProps> = ({
           }
         />
       )}
-      <span className="text--mono-caps-sm py-[2px]">{children}</span>
+      <span className={'text--mono-caps-sm py-[2px]'}>{children}</span>
     </span>
   )
 }

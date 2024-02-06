@@ -3,7 +3,6 @@
 import React, { useEffect, useState, Suspense } from 'react'
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -14,8 +13,6 @@ import {
   DialogBody,
   DialogClarification,
   DialogErrorMessage,
-  DialogHeading,
-  DialogLabelDescription,
   DialogLabelTitle,
 } from '@/features/dialogs/dialog-items'
 import { Input } from '@/components/shadcn/input'
@@ -28,14 +25,14 @@ import {
 } from '@/lib/validators'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
-import { Button, Clarification } from '@/components/ui/elements'
+import { Button } from '@/components/ui/elements'
 import {
   ChannelPasswordResponse,
   channelPasswordAccess,
 } from '@/app/actions/password-access'
+
 import useMessages from '@/stores/messages'
 import usePasswords from '@/stores/passwords'
-import { revalidatePath } from 'next/cache'
 
 const ChannelPassword = ({ children }: { children: React.ReactNode }) => {
   const { channelId } = useMessages()

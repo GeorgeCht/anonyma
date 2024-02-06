@@ -20,20 +20,26 @@ const ChannelBanner = ({
   tags: Array<string>
   className?: string
 }) => {
-  access !== null && access !== undefined && tags.push(access)
-  const { trimmedTags, remainingTags } = joinTagsAndTrim(tags, 28)
+  // Push access type as a tag if it exists
+  access !== null &&
+    access !== undefined &&
+    tags.filter((tag) => !tag.includes('private' || 'public')) &&
+    tags.push(access)
+
+  // Split tags via unique set
+  const { trimmedTags, remainingTags } = joinTagsAndTrim([...new Set(tags)], 28)
 
   return (
     <Link
       className={clsx(
         'block p-[10px] rounded-md transition-colors border bg-gray/50 hover:bg-gray border-light/10 hover:border-light/15 w-full overflow-x-hidden',
-        className
+        className,
       )}
       href={`/c/${title.toLowerCase()}`}
     >
       <h3
         className={clsx(
-          'text--body-lg transition-colors text-light/85 hover:text-light w-full'
+          'text--body-lg transition-colors text-light/85 hover:text-light w-full',
         )}
       >
         /{title.toLowerCase()}

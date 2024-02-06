@@ -9,7 +9,7 @@ import React, {
 } from 'react'
 
 import Opaque from '../motion/opaque'
-import Logo from '@/features/essentials/logo'
+import Logo from '@/components/ui/elements/logo'
 import Button from '@/components/ui/elements/button'
 import KeyboardKeys from '@/components/ui/elements/keyboard-keys'
 import clsx from 'clsx'
@@ -111,12 +111,15 @@ const Header = () => {
     setSearchTerm(searchValue)
   }, [])
 
-  const handleSearch = useDebouncedCallback((term: string) => {
-    const params = new URLSearchParams(searchParams)
-    const value = term.trim()
-    value ? params.set('search', term) : params.delete('search')
-    replace(`${pathname}?${params.toString()}`)
-  }, 666)
+  const handleSearch = useDebouncedCallback(
+    (term: string) => {
+      const params = new URLSearchParams(searchParams)
+      const value = term.trim()
+      value ? params.set('search', term) : params.delete('search')
+      replace(`${pathname}?${params.toString()}`)
+    },
+    searchTerm.length >= 3 ? 666 : 0,
+  )
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value

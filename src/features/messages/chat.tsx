@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Messages from '@/features/messages/messages'
 import Button from '@/components/ui/elements/button'
 
-import { useLenis } from '@/features/essentials/lenis'
+import { useLenis } from '@/components/providers/lenis'
 import { AnimatePresence, motion as Motion } from 'framer-motion'
 import { createPortal } from 'react-dom'
 import { ArrowDown } from 'lucide-react'

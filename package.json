@@ -1,5 +1,6 @@
 {
   "name": "anonyma",
+  "author": "GeorgeCht <georgecht@icloud.com>",
   "version": "0.4.0",
   "private": true,
   "scripts": {
@@ -10,7 +11,10 @@
     "config": "node --env-file=.env.local anonyma.mjs",
     "prepare": "node .husky/install.mjs",
     "commit": "git add . && cz",
-    "release": "standard-version --no-verify"
+    "release": "standard-version --no-verify",
+    "release--minor": "standard-version -- --release-as minor",
+    "release--major": "standard-version -- --release-as major",
+    "release--patch": "standard-version -- --release-as patch"
   },
   "husky": {
     "hooks": {
@@ -48,6 +52,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@studio-freight/react-lenis": "^0.0.43",
     "@studio-freight/tempus": "^0.0.42",
+    "@tanstack/react-query": "^5.18.1",
     "@upstash/redis": "^1.28.1",
     "bcrypt": "^5.1.1",
     "chalk": "^5.3.0",
@@ -84,6 +89,7 @@
     "@commitlint/cli": "^18.6.0",
     "@commitlint/config-conventional": "^18.6.0",
     "@commitlint/cz-commitlint": "^18.6.0",
+    "@tanstack/eslint-plugin-query": "^5.18.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

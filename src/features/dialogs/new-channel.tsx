@@ -26,14 +26,16 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { sanitateTags } from '@/lib/utils'
 import { NewChannelSchemaType, newChannelSchema } from '@/lib/validators'
-import { newChannel } from '@/app/actions/new-channel'
+import { NewChannelResponse, newChannel } from '@/app/actions/new-channel'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import { Button, Clarification } from '@/components/ui/elements'
 
 import clsx from 'clsx'
+import usePasswords from '@/stores/passwords'
 
 const NewChannel = ({ children }: { children: React.ReactNode }) => {
+  const { addPassword } = usePasswords()
   const [tags, setTags] = useState<string | null>(null)
   const [accessSwitch, setAccessSwitch] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -48,10 +50,10 @@ const NewChannel = ({ children }: { children: React.ReactNode }) => {
     })
 
   const { ref, ...partialNameRegister } = register('name')
-  const [state, formAction] = useFormState<ActionResponseState, FormData>(
-    newChannel,
-    null,
-  )
+  const [state, formAction] = useFormState<
+    ExtendedActionResponseState<NewChannelResponse>,
+    FormData
+  >(newChannel, null)
 
   const { pending } = useFormStatus()
 
@@ -65,11 +67,24 @@ const NewChannel = ({ children }: { children: React.ReactNode }) => {
       toast.error(state.message)
     }
     if (state.status === 'success') {
-      // TODO: If channel has password, add it to zustand store
-      setDialogOpen(false)
-      toast.success(state.message)
-      reset()
-      router.push(`/c/${channelName?.toLowerCase()}`)
+      const { access, id, password } = state.response
+      // If channel is private...
+      if (access === 'private') {
+        // Authenticate client side of the creator
+        addPassword({
+          channelId: id as string,
+          password: password as string,
+        })
+        setDialogOpen(false)
+        toast.success(state.message)
+        reset()
+        router.push(`/c/${channelName?.toLowerCase()}?access=granted`)
+      } else {
+        setDialogOpen(false)
+        toast.success(state.message)
+        reset()
+        router.push(`/c/${channelName?.toLowerCase()}`)
+      }
     }
   }, [state, setError, reset])
 

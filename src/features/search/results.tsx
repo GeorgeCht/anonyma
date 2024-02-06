@@ -1,31 +1,31 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { useTransition } from 'react'
-import { useSearchParams } from 'next/navigation'
-import { getResults } from '@/app/actions/get-results'
+import React from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { querySearchResults } from '@/app/actions/query-search-results'
+
 import ChannelBanner from '@/features/channels/banner'
 import * as Search from './'
 
-const SearchResults = () => {
-  const [isPending, startTransition] = useTransition()
-  const [results, setResults] = useState<Array<Omit<Channel, 'id'>>>([])
-  const searchParams = useSearchParams().get('search')
-
-  useEffect(() => {
-    searchParams &&
-      startTransition(async () => {
-        const searchResults = await getResults(searchParams)
-        setResults(searchResults)
-      })
-  }, [searchParams])
+const SearchResults = ({ query }: { query: string }) => {
+  const searchQuery = query
+    .replace(/[^a-zA-Z0-9 ]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+  const { isLoading, data: searchResults } = useQuery<
+    Array<Omit<Channel, 'id'>>
+  >({
+    queryKey: [`search-results-${searchQuery}`],
+    queryFn: () => querySearchResults(searchQuery),
+    staleTime: 5 * 60 * 1000, // 5mins
+  })
 
   return (
     <React.Fragment>
-      {isPending ? (
+      {isLoading ? (
         <Search.Skeleton />
-      ) : searchParams && results.length > 0 ? (
-        results.map((result, index) => (
+      ) : searchResults && searchResults.length > 0 ? (
+        searchResults.map((result, index) => (
           <ChannelBanner
             key={index}
             title={result.name}

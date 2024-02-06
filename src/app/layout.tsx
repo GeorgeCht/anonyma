@@ -1,12 +1,13 @@
-import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
-import LenisProvider from '../features/essentials/lenis'
-import Header from '../components/layout/header'
+import { LenisProvider, ReactQueryProvider } from '@/components/providers'
+import Header from '@/components/layout/header'
+
+import { Suspense } from 'react'
+import type { Metadata, Viewport } from 'next'
 import { TooltipProvider } from '@/components/shadcn/tooltip'
 import { Toaster } from '@/components/shadcn/sonner'
 import { HtmlTag } from '@/components/misc'
-import { Suspense } from 'react'
 import { extractDomainAndExt } from '@/lib/utils'
 import { Body } from '@/components/misc'
 
@@ -52,14 +53,16 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <Header />
           <LenisProvider>
-            <main
-              className={
-                'min-h-layout m-auto px-4 md:px-0 w-full max-w-prefered transition-all'
-              }
-            >
-              <TooltipProvider>{children}</TooltipProvider>
-            </main>
-            <Toaster />
+            <ReactQueryProvider>
+              <main
+                className={
+                  'min-h-layout m-auto px-4 md:px-0 w-full max-w-prefered transition-all'
+                }
+              >
+                <TooltipProvider>{children}</TooltipProvider>
+              </main>
+              <Toaster />
+            </ReactQueryProvider>
           </LenisProvider>
         </Suspense>
       </Body>

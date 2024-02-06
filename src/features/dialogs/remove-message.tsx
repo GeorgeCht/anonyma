@@ -40,13 +40,12 @@ const RemoveMessage = ({ children }: { children: React.ReactNode }) => {
 
   const [state, formAction] = useFormState<ActionResponseState, FormData>(
     removeMessage,
-    null
+    null,
   )
 
   const { pending } = useFormStatus()
 
   useEffect(() => {
-    console.log(state)
     if (!state) {
       return
     }

@@ -16,8 +16,15 @@ class CustomError<T = string> extends Error {
   }
 }
 
+export type NewChannelResponse = {
+  id: string
+  name: string
+  access: 'private' | 'public'
+  password: string
+}
+
 export async function newChannel(
-  prevState: ActionResponseState,
+  prevState: ExtendedActionResponseState<NewChannelResponse>,
   data: FormData,
 ) {
   try {
@@ -133,8 +140,14 @@ export async function newChannel(
     ])
     return {
       status: 'success',
+      response: {
+        id: channelId,
+        name: channelData.name,
+        access: channelData.access,
+        password: accessType === 'private' ? encryptedPassword : '',
+      } as NewChannelResponse,
       message: 'Channel created.',
-    } as ActionResponseState
+    } as ExtendedActionResponseState<NewChannelResponse>
   } catch (error) {
     return error instanceof ZodError
       ? ({
@@ -144,15 +157,15 @@ export async function newChannel(
             path: issue.path.join('.'),
             message: issue.message,
           })),
-        } as ActionResponseState)
+        } as ExtendedActionResponseState<NewChannelResponse>)
       : error instanceof CustomError
         ? ({
             status: 'error',
             message: error.message,
-          } as ActionResponseState)
+          } as ExtendedActionResponseState<NewChannelResponse>)
         : ({
             status: 'error',
             message: 'Something went wrong. Please try again.',
-          } as ActionResponseState)
+          } as ExtendedActionResponseState<NewChannelResponse>)
   }
 }

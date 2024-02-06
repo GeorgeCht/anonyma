@@ -1,22 +1,6 @@
 [
   {
-    "name": "anonyma",
-    "tags": [
-      "funny",
-      "humor",
-      "chat",
-      "channels",
-      "entertainment",
-      "random",
-      "laughter",
-      "jokes",
-      "comedy",
-      "hilarious",
-      "satire"
-    ]
-  },
-  {
-    "name": "general",
+    "title": "general",
     "tags": [
       "technology",
       "politics",
@@ -34,51 +18,23 @@
     ]
   },
   {
-    "name": "funny",
+    "title": "anonyma",
     "tags": [
       "funny",
       "humor",
-      "memes",
+      "chat",
+      "channels",
       "entertainment",
-      "laughs",
-      "giggle",
-      "amusing",
-      "wit",
-      "comic",
-      "hilarity"
+      "random",
+      "laughter",
+      "jokes",
+      "comedy",
+      "hilarious",
+      "satire"
     ]
   },
   {
-    "name": "anime",
-    "tags": [
-      "art",
-      "entertainment",
-      "animation",
-      "japanese",
-      "manga",
-      "otaku",
-      "cosplay",
-      "fantasy",
-      "comics",
-      "characters"
-    ]
-  },
-  {
-    "name": "animals",
-    "tags": [
-      "animals",
-      "entertainment",
-      "funny",
-      "advice",
-      "pets",
-      "cute",
-      "wildlife",
-      "petcare",
-      "adorable"
-    ]
-  },
-  {
-    "name": "games",
+    "title": "games",
     "tags": [
       "game",
       "games",
@@ -93,7 +49,7 @@
     ]
   },
   {
-    "name": "politics",
+    "title": "politics",
     "tags": [
       "politics",
       "news",
@@ -108,7 +64,51 @@
     ]
   },
   {
-    "name": "sci-fi",
+    "title": "funny",
+    "tags": [
+      "funny",
+      "humor",
+      "memes",
+      "entertainment",
+      "laughs",
+      "giggle",
+      "amusing",
+      "wit",
+      "comic",
+      "hilarity"
+    ]
+  },
+  {
+    "title": "anime",
+    "tags": [
+      "art",
+      "entertainment",
+      "animation",
+      "japanese",
+      "manga",
+      "otaku",
+      "cosplay",
+      "fantasy",
+      "comics",
+      "characters"
+    ]
+  },
+  {
+    "title": "animals",
+    "tags": [
+      "animals",
+      "entertainment",
+      "funny",
+      "advice",
+      "pets",
+      "cute",
+      "wildlife",
+      "petcare",
+      "adorable"
+    ]
+  },
+  {
+    "title": "sci-fi",
     "tags": [
       "science",
       "technology",
@@ -123,7 +123,7 @@
     ]
   },
   {
-    "name": "films",
+    "title": "films",
     "tags": [
       "movies",
       "entertainment",
@@ -137,7 +137,7 @@
     ]
   },
   {
-    "name": "music",
+    "title": "music",
     "tags": [
       "music",
       "entertainment",
@@ -152,7 +152,7 @@
     ]
   },
   {
-    "name": "books",
+    "title": "books",
     "tags": [
       "books",
       "education",
@@ -167,7 +167,7 @@
     ]
   },
   {
-    "name": "food",
+    "title": "food",
     "tags": [
       "food",
       "travel",
@@ -181,7 +181,7 @@
     ]
   },
   {
-    "name": "stocks",
+    "title": "stocks",
     "tags": [
       "finance",
       "stocks",
@@ -197,7 +197,7 @@
     ]
   },
   {
-    "name": "crypto",
+    "title": "crypto",
     "tags": [
       "crypto",
       "bitcoin",
