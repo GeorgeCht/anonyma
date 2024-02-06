@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.2](https://github.com/GeorgeCht/anonyma/compare/v0.4.1...v0.4.2) (2024-02-06)
+
+
+### ✨ Features
+
+* **messages:** added profanity censoring for messages ([d395c86](https://github.com/GeorgeCht/anonyma/commit/d395c86dbcd42be75707f0f519500757178026e9))
+
 ### [0.4.1](https://github.com/GeorgeCht/anonyma/compare/v0.4.0...v0.4.1) (2024-02-06)
 
 
