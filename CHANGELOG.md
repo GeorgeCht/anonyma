@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/GeorgeCht/anonyma/compare/v0.4.3...v0.5.0) (2024-02-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **channel tags:** Channel creator can now edit, remove and add channel tags.
+
+### ✨ Features
+
+* **channel tags:** added feature channel creator can now edit channel tags ([8162ec8](https://github.com/GeorgeCht/anonyma/commit/8162ec829dd455619638628fc597dda9915d8dda))
+
 ### [0.4.3](https://github.com/GeorgeCht/anonyma/compare/v0.4.2...v0.4.3) (2024-02-06)
 
 

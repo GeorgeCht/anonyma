@@ -1,7 +1,7 @@
 {
   "name": "anonyma",
   "author": "GeorgeCht <georgecht@icloud.com>",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -12,9 +12,9 @@
     "prepare": "node .husky/install.mjs",
     "commit": "git add . && cz",
     "release": "standard-version --no-verify",
+    "release--patch": "standard-version -- --release-as patch",
     "release--minor": "standard-version -- --release-as minor",
-    "release--major": "standard-version -- --release-as major",
-    "release--patch": "standard-version -- --release-as patch"
+    "release--major": "standard-version -- --release-as major"
   },
   "husky": {
     "hooks": {
