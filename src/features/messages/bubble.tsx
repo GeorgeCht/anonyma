@@ -1,7 +1,7 @@
 'use client'
 
 import { Suspense, useRef, useState } from 'react'
-import { detectURLs, timeAgo } from '@/lib/utils'
+import { censorExpletives, detectURLs, timeAgo } from '@/lib/utils'
 
 import { useDoubleTap } from 'use-double-tap'
 import clsx from 'clsx'
@@ -27,6 +27,7 @@ import {
 import { AlertTriangle } from 'lucide-react'
 import { toast } from 'sonner'
 import useMessages from '@/stores/messages'
+import useSettings from '@/stores/settings'
 
 const MessageBubble = ({
   sentBy = 'anon',
@@ -41,6 +42,7 @@ const MessageBubble = ({
 }) => {
   const [openDrawer, setOpenDrawer] = useState(false)
   const { setActionMessage } = useMessages()
+  const { profanityFilter } = useSettings()
   const msgRef = useRef<HTMLDivElement>(null)
   const handleClick = () => {
     const element = msgRef.current
@@ -170,7 +172,9 @@ const MessageBubble = ({
               User unsent this message
             </i>
           ) : (
-            <p className={'text--mono-base'}>{message}</p>
+            <p className={'text--mono-base'}>
+              {profanityFilter ? censorExpletives(message) : message}
+            </p>
           )}
         </div>
       </div>

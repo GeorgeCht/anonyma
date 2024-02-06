@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { v4 as uniqueID } from 'uuid'
 import adjectives from './adjectives.json'
+import expletives from './expletives.json'
 import nouns from './nouns.json'
 import crypto from 'crypto'
 
@@ -218,4 +219,21 @@ export function sortMessagesByTimestamp(
 export function timestampToHours(timestamp: number): string {
   const hours = Math.floor(timestamp / (60 * 60))
   return hours.toString().padStart(2, '0') + ' hours'
+}
+
+export function censorExpletives(input: string): string {
+  const expletiveList: Array<string> = expletives
+
+  return input
+    .split(' ')
+    .map((word) => {
+      // Check if the word is an expletive
+      if (expletiveList.includes(word.toLowerCase())) {
+        // Replace expletive word with asterisks of the same length
+        return '*'.repeat(word.length)
+      } else {
+        return word
+      }
+    })
+    .join(' ')
 }
