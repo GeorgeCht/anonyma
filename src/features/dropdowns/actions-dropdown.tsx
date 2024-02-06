@@ -31,13 +31,18 @@ const ActionsDropdown = ({ children }: { children: React.ReactNode }) => {
   >('other')
   const pathname = usePathname()
 
+  const isMac =
+    typeof window !== 'undefined'
+      ? navigator.userAgent.toUpperCase().indexOf('MAC') >= 0
+      : false
+
   useEffect(() => {
     setCurrentPage(
       pathname.startsWith('/browse')
         ? 'browse'
         : pathname.startsWith('/c/')
-        ? 'channel'
-        : 'other'
+          ? 'channel'
+          : 'other',
     )
   }, [pathname])
 
@@ -206,7 +211,7 @@ const ActionsDropdown = ({ children }: { children: React.ReactNode }) => {
           >
             <span>Settings</span>
             <DropdownMenuShortcut>
-              <KeyboardKeys keys={['Ctrl', '+', ',']} />
+              <KeyboardKeys keys={[isMac ? 'Cmd' : 'Ctrl', '+', ',']} />
             </DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>

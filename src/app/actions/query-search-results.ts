@@ -17,12 +17,14 @@ export const querySearchResults = async (searchQuery: string) => {
   })
 
   const [, resultsArray] = results
-  if (resultsArray.length > 0) {
+
+  if (resultsArray && resultsArray.length > 0) {
     await Promise.all(
       resultsArray.map(async (result) => {
-        const channelIdResults = await db.zrange<Array<string>>(result, 0, -1)
-
-        if (channelIdResults.length > 0) {
+        const channelIdResults = [
+          ...new Set(await db.zrange<Array<string>>(result, 0, -1)),
+        ]
+        if (channelIdResults && channelIdResults.length > 0) {
           await Promise.all(
             channelIdResults.map(async (channelId) => {
               const channel = await db.get<Omit<Channel, 'id'>>(
@@ -31,9 +33,13 @@ export const querySearchResults = async (searchQuery: string) => {
               channel && channelResults.push(channel)
             }),
           )
+        } else {
+          return []
         }
       }),
     )
+  } else {
+    return []
   }
 
   return [...new Set(channelResults)]

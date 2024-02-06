@@ -3,6 +3,7 @@
 import React, { useEffect, useState, Suspense } from 'react'
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -93,16 +94,18 @@ const ChannelPassword = ({ children }: { children: React.ReactNode }) => {
           <DialogHeader>
             <DialogTitle>Access channel</DialogTitle>
           </DialogHeader>
-          <DialogBody>
-            <DialogLabelTitle className={'pt-4'}>Display name</DialogLabelTitle>
+          <DialogBody className={'min-h-24'}>
             <Input
               placeholder={'Channel name'}
               autoComplete={'off'}
               disabled={pending}
+              className={'hidden'}
               {...register('channelId')}
               value={channelId}
             />
-            <DialogLabelTitle>Channel password</DialogLabelTitle>
+            <DialogLabelTitle className={'pt-4'}>
+              Channel password
+            </DialogLabelTitle>
             <Input
               type={'password'}
               placeholder={'••••••••'}
@@ -115,8 +118,8 @@ const ChannelPassword = ({ children }: { children: React.ReactNode }) => {
           </DialogBody>
           <DialogFooter className={'sm:justify-start pt-4'}>
             <DialogClarification className={'pb-4'}>
-              Settings are stored and applied locally only for your device. You
-              can also reset settings to default.
+              Channel is private access only. A password is required to access
+              its messages.
             </DialogClarification>
             <Button
               type={'submit'}
@@ -125,6 +128,15 @@ const ChannelPassword = ({ children }: { children: React.ReactNode }) => {
               loading={pending}
             >
               Submit
+            </Button>
+            <Button
+              intent={'full'}
+              variant={'ghost'}
+              size={'lg'}
+              className={'px-8'}
+              onClick={() => router.back()}
+            >
+              Go back
             </Button>
           </DialogFooter>
         </form>

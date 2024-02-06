@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/elements'
 import IconViber from '@/components/ui/icons/icon-viber'
 import IconTelegram from '@/components/ui/icons/icon-telegram'
 import IconWhatsApp from '@/components/ui/icons/icon-whatsapp'
+import { toast } from 'sonner'
 
 const Share = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()
@@ -93,7 +94,14 @@ const Share = ({ children }: { children: React.ReactNode }) => {
             Settings are stored and applied locally only for your device. You
             can also reset settings to default.
           </DialogClarification>
-          <Button intent={'full'} size={'lg'}>
+          <Button
+            intent={'full'}
+            size={'lg'}
+            onClick={() => {
+              navigator.clipboard.writeText(constructedUrl)
+              toast.success('Link copied to clipboard.')
+            }}
+          >
             <LinkIcon className={'mr-2'} size={15} strokeWidth={2.75} />
             Copy link
           </Button>

@@ -172,3 +172,40 @@ export const channelPasswordSchema = z.object({
 })
 
 export type ChannelPasswordSchemaType = z.infer<typeof channelPasswordSchema>
+
+export const editChannelTagsSchema = z.object({
+  channelId: z.string(),
+  tags: z
+    .string()
+    .superRefine((tags, ctx) => {
+      if (tags.length > 0) {
+        const tagsArray = tags.split(',')
+        if (tagsArray.every((tag) => tag.length <= 2)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Tags must be at least 2 characters.',
+          })
+        }
+        if (tagsArray.every((tag) => tag.length >= 24)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Tags cannot exceed 24 characters.',
+          })
+        }
+        if (
+          tagsArray.every(
+            (tag) =>
+              tag.toLowerCase() === 'public' || tag.toLowerCase() === 'private',
+          )
+        ) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: 'Tag cannot be used.',
+          })
+        }
+      }
+    })
+    .nullable(),
+})
+
+export type EditChannelTagsSchemaType = z.infer<typeof editChannelTagsSchema>

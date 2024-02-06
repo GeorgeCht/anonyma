@@ -34,6 +34,11 @@ const Header = () => {
   )
   const [headerState, headerDispatch] = useHeaderReducer()
 
+  const isMac =
+    typeof window !== 'undefined'
+      ? navigator.userAgent.toUpperCase().indexOf('MAC') >= 0
+      : false
+
   // Set header UI state
   useEffect(() => {
     if (pathname === '/') {
@@ -91,7 +96,7 @@ const Header = () => {
   })
 
   // Alt + n shortcut handler
-  useKeyboardShortcut(['alt', 'n'], () => {
+  useKeyboardShortcut(['shift', 'n'], () => {
     const dialogueElement = document.querySelector('[role="dialog"]')
     dialogueElement !== null ||
       document.getElementById('trigger--new-channel-dialog')?.click()
@@ -194,7 +199,7 @@ const Header = () => {
                   />
                   <KeyboardKeys
                     className={'min-[1280px]:flex hidden pr-2'}
-                    keys={['Ctrl', '+', 'K']}
+                    keys={[isMac ? 'Cmd' : 'Ctrl', '+', 'K']}
                   />
                 </div>
               </Opaque>
@@ -215,7 +220,7 @@ const Header = () => {
                 <div className={'flex justify-end items-center flex-row gap-4'}>
                   <KeyboardKeys
                     className={'min-[1280px]:flex hidden'}
-                    keys={['Alt', '+', 'N']}
+                    keys={['Shft', '+', 'N']}
                   />
                   <Button
                     className={'hidden lg:inline-flex'}
