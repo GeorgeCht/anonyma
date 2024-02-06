@@ -13,14 +13,13 @@ const SearchResults = ({ query }: { query: string }) => {
     .replace(/\s+/g, ' ')
     .trim()
   const { isLoading, data: searchResults } = useQuery<
-    Array<Omit<Channel, 'id'>>
+    Array<Pick<Channel, 'name' | 'tags' | 'access'>>
   >({
     queryKey: [`search-results-${searchQuery}`],
     queryFn: () => querySearchResults(searchQuery),
     staleTime: 5 * 60 * 1000, // 5mins
   })
 
-  // TODO: searchResults should return only id, name, tags, access
   console.log(searchResults)
 
   return (

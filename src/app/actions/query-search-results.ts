@@ -10,7 +10,7 @@ export const querySearchResults = async (searchQuery: string) => {
     .trim()
 
   // Scan tags for query
-  const channelResults: Array<Omit<Channel, 'id'>> = []
+  const channelResults: Array<Pick<Channel, 'name' | 'tags' | 'access'>> = []
   const results = await db.scan(0, {
     match: `tag:*${queryString}*`,
     type: 'zset',
@@ -30,7 +30,12 @@ export const querySearchResults = async (searchQuery: string) => {
               const channel = await db.get<Omit<Channel, 'id'>>(
                 `channel:${channelId}`,
               )
-              channel && channelResults.push(channel)
+              channel &&
+                channelResults.push({
+                  name: channel.name,
+                  tags: channel.tags,
+                  access: channel.access,
+                })
             }),
           )
         } else {
