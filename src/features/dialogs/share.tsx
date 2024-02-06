@@ -17,10 +17,11 @@ import { QRCodeSVG } from 'qrcode.react'
 import { LinkIcon } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/elements'
+import { toast } from 'sonner'
+
 import IconViber from '@/components/ui/icons/icon-viber'
 import IconTelegram from '@/components/ui/icons/icon-telegram'
 import IconWhatsApp from '@/components/ui/icons/icon-whatsapp'
-import { toast } from 'sonner'
 
 const Share = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()

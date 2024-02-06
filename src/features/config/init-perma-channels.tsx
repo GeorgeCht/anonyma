@@ -1,8 +1,9 @@
 'use client'
 
+import React, { useState, useTransition } from 'react'
+
 import { initPermanentChannel } from '@/app/actions/config-init-perma-channels'
 import { Button } from '@/components/ui/elements'
-import React, { useState, useTransition } from 'react'
 import { toast } from 'sonner'
 
 const InitiatePermaChannelsButton = ({ authKey }: { authKey: string }) => {

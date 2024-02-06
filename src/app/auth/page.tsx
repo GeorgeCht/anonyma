@@ -18,6 +18,10 @@ const LoaderPage = () => {
   const redirectParam = searchParams.get('redirect')
 
   useEffect(() => {
+    const userCreationTimeout = Math.floor(Math.random() * 1000) + 400
+    const userAuthTimeout = Math.floor(Math.random() * 1000) + 400
+    const errorTimeout = Math.floor(Math.random() * 1000) + 400
+
     const timer = setTimeout(() => {
       startTransition(async () => {
         const newUser = await createUser()
@@ -25,18 +29,18 @@ const LoaderPage = () => {
           const authedUser = await authUser(newUser)
           setIsLoading(false)
           if (authedUser) {
-            await wait(1000)
+            await wait(userCreationTimeout)
             if (redirectParam) {
               push(`/c/${redirectParam}?onboarding`)
             } else {
               push('/browse?onboarding')
             }
           } else {
-            await wait(1000)
+            await wait(userAuthTimeout)
             push('/error?unexpected')
           }
         } else {
-          await wait(1000)
+          await wait(errorTimeout)
           push('/error?unexpected')
         }
       })

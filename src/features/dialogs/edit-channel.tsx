@@ -13,20 +13,16 @@ import {
 import {
   DialogBody,
   DialogClarification,
-  DialogHeading,
   DialogLabelDescription,
   DialogLabelTitle,
 } from '@/features/dialogs/dialog-items'
 import { Input } from '@/components/shadcn/input'
-import { Switch } from '@/components/shadcn/switch'
 import { TagsInput } from 'react-tag-input-component'
 import { useFormState, useFormStatus } from 'react-dom'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { sanitateTags } from '@/lib/utils'
 import { Button } from '@/components/ui/elements'
-
-import clsx from 'clsx'
 import { usePathname } from 'next/navigation'
 import { isChannelCreator } from '@/app/actions/is-channel-creator'
 import { getChannelByName } from '@/app/actions/get-channel-by-name'
@@ -37,6 +33,7 @@ import {
 } from '@/lib/validators'
 import { Loader2 } from 'lucide-react'
 import { editTags } from '@/app/actions/edit-tags'
+import clsx from 'clsx'
 
 const EditChannel = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()
@@ -60,9 +57,6 @@ const EditChannel = ({ children }: { children: React.ReactNode }) => {
   const { pending } = useFormStatus()
 
   useEffect(() => {
-    toast.info(state?.status, {
-      description: state?.message,
-    })
     if (!state) {
       return
     }

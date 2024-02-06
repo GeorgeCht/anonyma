@@ -13,10 +13,10 @@ const Tag: FC<TagProps> = ({ theme = 'light', children }) => {
         'rounded-xl  transition-colors -mt-2',
         theme === 'light' &&
           'text-light/60 border-light/10 hover:text-light/80',
-        theme === 'dark' && 'text-dark/60 border-dark/10 hover:text-dark/80'
+        theme === 'dark' && 'text-dark/60 border-dark/10 hover:text-dark/80',
       )}
     >
-      <span className="text--mono-xs text-[9px] py-[1px]">{children}</span>
+      <span className={'text--mono-xs text-[9px] py-[1px]'}>{children}</span>
     </span>
   )
 }

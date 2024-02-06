@@ -15,12 +15,13 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/shadcn/dropdown-menu'
-import KeyboardKeys from '@/components/ui/elements/keyboard-keys'
-import useSettings from '@/stores/settings'
 import { usePathname } from 'next/navigation'
-import Link from 'next/link'
 import { isChannelCreator } from '@/app/actions/is-channel-creator'
 import { toast } from 'sonner'
+
+import KeyboardKeys from '@/components/ui/elements/keyboard-keys'
+import useSettings from '@/stores/settings'
+import Link from 'next/link'
 
 const ActionsDropdown = ({ children }: { children: React.ReactNode }) => {
   const { setTextSize, setViewSize, setTheme } = useSettings()

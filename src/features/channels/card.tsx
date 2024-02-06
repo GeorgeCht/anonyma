@@ -1,4 +1,4 @@
-import Badge from '../../components/ui/elements/badge'
+import Badge from '@/components/ui/elements/badge'
 import Link from 'next/link'
 import clsx from 'clsx'
 import { joinTagsAndTrim } from '@/lib/utils'

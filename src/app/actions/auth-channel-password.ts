@@ -2,7 +2,7 @@
 
 import { db } from '@/lib/db'
 import { userSession as session } from './session'
-import { getChannelById } from './get-channel-by-id'
+import { getChannelById } from '@/app/actions/get-channel-by-id'
 import { ChannelPasswords } from '@/stores/passwords'
 
 export async function authChannelPassword(data: ChannelPasswords) {

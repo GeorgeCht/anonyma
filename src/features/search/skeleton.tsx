@@ -2,7 +2,7 @@ import { Skeleton } from '@/components/shadcn/skeleton'
 
 const SearchSkeleton = () => {
   return (
-    <div className={'flex flex-col'}>
+    <div className={'flex flex-col'} aria-busy={'true'} aria-live={'polite'}>
       <div className={'*:h-[60px] *:w-full *:rounded-md *:mt-1'}>
         <Skeleton className={'bg-gray'} />
       </div>

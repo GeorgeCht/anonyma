@@ -6,6 +6,7 @@ import { encrypt } from '@/lib/utils'
 import { ZodError } from 'zod'
 import { channelPasswordSchema } from '@/lib/validators'
 import { getChannelById } from './get-channel-by-id'
+import { revalidatePath } from 'next/cache'
 
 class CustomError<T = string> extends Error {
   constructor(message: T) {
@@ -57,6 +58,10 @@ export async function channelPasswordAccess(
     // Compare input password with db password
     if (channelData.response.password !== encryptedPassword)
       throw new CustomError('Invalid password.')
+
+    // Purge cached data
+    revalidatePath(`/c/${channelData.response.name}`)
+    revalidatePath(`/c/${channelData.response.name}?access=granted`)
 
     return {
       status: 'success',

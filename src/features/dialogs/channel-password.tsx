@@ -3,7 +3,6 @@
 import React, { useEffect, useState, Suspense } from 'react'
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -72,6 +71,7 @@ const ChannelPassword = ({ children }: { children: React.ReactNode }) => {
       router.push(
         `/c/${state.response.channelName.toLowerCase()}?access=granted`,
       )
+      router.refresh()
     }
   }, [state, setError, reset])
 

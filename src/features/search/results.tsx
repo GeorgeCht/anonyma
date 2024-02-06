@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { querySearchResults } from '@/app/actions/query-search-results'
 
 import ChannelBanner from '@/features/channels/banner'
-import * as Search from './'
+import * as Search from '@/features/search'
 
 const SearchResults = ({ query }: { query: string }) => {
   const searchQuery = query
@@ -19,6 +19,9 @@ const SearchResults = ({ query }: { query: string }) => {
     queryFn: () => querySearchResults(searchQuery),
     staleTime: 5 * 60 * 1000, // 5mins
   })
+
+  // TODO: searchResults should return only id, name, tags, access
+  console.log(searchResults)
 
   return (
     <React.Fragment>
