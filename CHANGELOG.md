@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/GeorgeCht/anonyma/compare/v0.5.1...v0.6.0) (2024-02-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* **messages:** Optimistic UI on chat messages
+
+### ✨ Features
+
+* **messages:** added optimistic message updates ([7033f61](https://github.com/GeorgeCht/anonyma/commit/7033f61f64adce9b98572d862226773480c87ed0))
+
 ### [0.5.1](https://github.com/GeorgeCht/anonyma/compare/v0.5.0...v0.5.1) (2024-02-06)
 
 
