@@ -14,6 +14,7 @@ import { toPusherKey } from '@/lib/utils'
 import { StickyHeader } from '@/components/misc'
 import usePasswords from '@/stores/passwords'
 import { authChannelPassword } from '@/app/actions/auth-channel-password'
+import NoMessages from './no-messages'
 
 const MessageLayout = ({
   messages,
@@ -122,14 +123,20 @@ const MessageLayout = ({
           {pinAnnouncement && (
             <MessageAnnouncement announcement={channel.announcement} sticky />
           )}
-          <LoadMoreMessages />
-          <Chat
-            channel={channel}
-            sessionId={sessionId}
-            messages={storeMessages}
-            notification={notification}
-            setNotification={setNotification}
-          />
+          {storeMessages.length === 0 ? (
+            <NoMessages />
+          ) : (
+            <React.Fragment>
+              <LoadMoreMessages />
+              <Chat
+                channel={channel}
+                sessionId={sessionId}
+                messages={storeMessages}
+                notification={notification}
+                setNotification={setNotification}
+              />
+            </React.Fragment>
+          )}
         </React.Fragment>
       ) : null}
     </React.Fragment>
