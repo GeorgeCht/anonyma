@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/GeorgeCht/anonyma/compare/v1.0.2...v1.1.0) (2024-02-07)
+
+
+### ✨ Features
+
+* **messages:** added empty state for messages in channels ([fdbc10b](https://github.com/GeorgeCht/anonyma/commit/fdbc10b9f90407b8813d9e138991b42a81c1bb57))
+
 ### [1.0.2](https://github.com/GeorgeCht/anonyma/compare/v1.0.1...v1.0.2) (2024-02-07)
 
 
