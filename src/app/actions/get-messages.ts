@@ -7,7 +7,7 @@ export async function getChatMessages(channelId: string) {
     const results = await db.zrange<Array<Message>>(
       `channel:${channelId}:messages`,
       0,
-      -1
+      -1,
     )
 
     // Decrypt each message
@@ -21,6 +21,7 @@ export async function getChatMessages(channelId: string) {
         senderUsername: message.senderUsername,
         message: decryptedMessage,
         timestamp: message.timestamp,
+        delivered: message.delivered,
       } satisfies Message
     })
 
@@ -37,14 +38,14 @@ export async function getChatMessages(channelId: string) {
 export async function getChatMessagesExperimental(
   channelId: string,
   from: number = 0,
-  to: number = -1
+  to: number = -1,
 ): Promise<Array<Message>> {
   try {
     // Get messages via channel id
     const results = await db.zrange<Array<Message>>(
       `channel:${channelId}:messages`,
       from,
-      to
+      to,
     )
 
     // Decrypt each message
@@ -58,6 +59,7 @@ export async function getChatMessagesExperimental(
         senderUsername: message.senderUsername,
         message: decryptedMessage,
         timestamp: message.timestamp,
+        delivered: message.delivered,
       } satisfies Message
     })
 
