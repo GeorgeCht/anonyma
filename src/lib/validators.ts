@@ -96,10 +96,13 @@ export const sendMessageSchema = z.object({
     })
     .min(1, { message: 'Message cannot be empty.' })
     .max(264, { message: 'Message cannot exceed 264 characters.' })
-    .regex(/^[a-zA-Z0-9\s.,!?(){}[\]<>@#$%^&*-_+=:;'"`|\\/]*$/, {
-      message: 'Forbidden character in use.',
+    .regex(/^[^<>&'"/]*$/, {
+      message: 'Forbidden character detected.',
     }),
-  id: z.string(),
+  senderId: z.string(),
+  senderUsername: z.string(),
+  messageId: z.string(),
+  channelId: z.string(),
 })
 
 export type SendMessageSchemaType = z.infer<typeof sendMessageSchema>

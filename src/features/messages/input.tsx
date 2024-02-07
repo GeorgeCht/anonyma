@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { useFormState, useFormStatus } from 'react-dom'
 import { useForm } from 'react-hook-form'
@@ -9,9 +9,17 @@ import { sendMessageSchema, SendMessageSchemaType } from '@/lib/validators'
 import { Input } from '@/components/shadcn/input'
 import { sendMessage } from '@/app/actions/send-message'
 import { motion as Motion } from 'framer-motion'
-import Button from '@/components/ui/elements/button'
+import { uniqueId } from '@/lib/utils'
 
-const MessageInput = ({ id }: Pick<Channel, 'id'>) => {
+import Button from '@/components/ui/elements/button'
+import useClientSession from '@/stores/session'
+import useMessages from '@/stores/messages'
+
+const MessageInput = ({ id: channelId }: Pick<Channel, 'id'>) => {
+  const [messageUniqueId, setMessageUniqueId] = useState(uniqueId())
+  const [messageTempText, setMessageTempText] = useState('')
+  const { id: sessionId, name: sessionUsername } = useClientSession()
+  const { addMessage } = useMessages()
   const { register, reset, setError } = useForm<SendMessageSchemaType>({
     resolver: zodResolver(sendMessageSchema),
   })
@@ -20,6 +28,7 @@ const MessageInput = ({ id }: Pick<Channel, 'id'>) => {
     sendMessage,
     null,
   )
+  const { onChange, ...partialRegister } = register('message')
   useEffect(() => {
     if (!state) {
       return
@@ -60,6 +69,28 @@ const MessageInput = ({ id }: Pick<Channel, 'id'>) => {
     >
       <form
         onSubmit={() => {
+          try {
+            const optimisticMessage = {
+              channelId: channelId,
+              messageId: messageUniqueId,
+              senderId: sessionId!,
+              senderUsername: sessionUsername!,
+              message: messageTempText,
+            }
+            sendMessageSchema.parse(optimisticMessage)
+
+            // Optimistically sends message
+            addMessage({
+              id: messageUniqueId,
+              senderId: sessionId!,
+              senderUsername: sessionUsername!,
+              message: messageTempText,
+              timestamp: Date.now(),
+              delivered: false,
+            })
+          } catch (error) {}
+          setMessageTempText('')
+          setMessageUniqueId(uniqueId())
           document.getElementById('scrollToBottom-button--trigger')?.click()
         }}
         action={formAction}
@@ -70,8 +101,29 @@ const MessageInput = ({ id }: Pick<Channel, 'id'>) => {
         <Input
           className={'hidden'}
           aria-hidden
-          value={id}
-          {...register('id')}
+          type={'text'}
+          value={channelId}
+          {...register('channelId')}
+        />
+        <Input
+          className={'hidden'}
+          aria-hidden
+          value={messageUniqueId}
+          {...register('messageId')}
+        />
+        <Input
+          className={'hidden'}
+          aria-hidden
+          type={'text'}
+          value={sessionId || ''}
+          {...register('senderId')}
+        />
+        <Input
+          className={'hidden'}
+          aria-hidden
+          type={'text'}
+          value={sessionUsername || ''}
+          {...register('senderUsername')}
         />
         <Input
           autoComplete={'off'}
@@ -81,7 +133,12 @@ const MessageInput = ({ id }: Pick<Channel, 'id'>) => {
           className={
             'w-full relative bg-dark text--mono-base border-0 text-light outline-none bg-transparent focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-0'
           }
-          {...register('message')}
+          {...partialRegister}
+          value={messageTempText}
+          onChange={(e) => {
+            setMessageTempText(e.target.value)
+            onChange(e)
+          }}
         />
         <Button
           type={'submit'}

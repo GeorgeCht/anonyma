@@ -4,7 +4,7 @@ import { db } from '@/lib/db'
 import { userSession as session } from './session'
 import { ZodError } from 'zod'
 import { sendMessageSchema } from '@/lib/validators'
-import { toPusherKey, uniqueId } from '@/lib/utils'
+import { toPusherKey } from '@/lib/utils'
 import { encrypt } from '@/lib/utils'
 import { pusherServer } from '@/lib/pusher'
 
@@ -20,10 +20,14 @@ export async function sendMessage(
   data: FormData,
 ) {
   try {
-    const { id, message } = sendMessageSchema.parse({
-      id: data.get('id') as string,
-      message: data.get('message') as string,
-    })
+    const { channelId, messageId, message, senderId, senderUsername } =
+      sendMessageSchema.parse({
+        channelId: data.get('channelId') as string,
+        messageId: data.get('messageId') as string,
+        senderId: data.get('senderId') as string,
+        senderUsername: data.get('senderUsername') as string,
+        message: data.get('message') as string,
+      })
 
     const timestampScore = Date.now()
 
@@ -37,13 +41,14 @@ export async function sendMessage(
     if (!(await session.authenticate()) || !user)
       throw new CustomError('Unauthorized session. Please try again.')
 
+    // Auth user with client session
+    if (userSession.id !== senderId || userSession.name !== senderUsername)
+      throw new CustomError('Unauthorized action. Client session missmatch.')
+
     // Encrypt message
     const encryptedMessage = encrypt(message, {
       withServerVector: true,
     })
-
-    // Set unique id for message
-    const messageId = uniqueId()
 
     // Mutate message data
     const mutatedData = {
@@ -52,6 +57,7 @@ export async function sendMessage(
       senderUsername: userSession.name,
       message: encryptedMessage,
       timestamp: timestampScore,
+      delivered: true,
     } satisfies Message
 
     // Prepare data for pusher
@@ -61,17 +67,18 @@ export async function sendMessage(
       senderUsername: userSession.name,
       message: message,
       timestamp: timestampScore,
+      delivered: true,
     } satisfies Message
 
     // Notify messages to subscribed users
     await pusherServer.trigger(
-      toPusherKey(`channel:${id}:messages`),
+      toPusherKey(`channel:${channelId}:messages`),
       'message',
       messageData,
     )
 
     // Persist message data in db
-    await db.zadd(`channel:${id}:messages`, {
+    await db.zadd(`channel:${channelId}:messages`, {
       score: timestampScore,
       member: JSON.stringify(mutatedData),
     })

@@ -17,7 +17,7 @@ import {
   DialogLabelDescription,
   DialogLabelTitle,
 } from '@/features/dialogs/dialog-items'
-import { Textarea } from '../../components/shadcn/textarea'
+import { Textarea } from '@/components/shadcn/textarea'
 import { usePathname } from 'next/navigation'
 import { toast } from 'sonner'
 import { isChannelCreator } from '@/app/actions/is-channel-creator'
@@ -36,7 +36,7 @@ import { Button } from '@/components/ui/elements'
 
 const EditAnnouncement = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()
-  const [isPending, startTransition] = useTransition()
+  const [, startTransition] = useTransition()
   const [canEditChannel, setCanEditChannel] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [announcement, setAnnouncement] = useState('')

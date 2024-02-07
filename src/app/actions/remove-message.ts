@@ -56,6 +56,7 @@ export async function removeMessage(
       senderUsername: senderUsername,
       message: '',
       timestamp: timestamp,
+      delivered: true,
     } satisfies Message
 
     // Prepare data for pusher
@@ -65,6 +66,7 @@ export async function removeMessage(
       senderUsername: senderUsername,
       message: '',
       timestamp: timestamp,
+      delivered: true,
     } satisfies Message
 
     // Notify removed message to subscribed users

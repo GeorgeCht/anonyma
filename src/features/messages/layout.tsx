@@ -25,7 +25,7 @@ const MessageLayout = ({
   channel: Channel
 }) => {
   const { entryExists, findEntry } = usePasswords()
-  const [isPending, startTransition] = useTransition()
+  const [, startTransition] = useTransition()
   const [presenceCount, setPresenceCount] = useState(0)
   const [notification, setNotification] = useState(0)
   const [isPasswordAuth, setIsPasswordAuth] = useState(false)
@@ -96,8 +96,10 @@ const MessageLayout = ({
 
       // Messages handler
       const messageHandler = (message: Message) => {
-        addMessage(message)
-        message.senderId !== sessionId && setNotification((prev) => prev + 1)
+        message.senderId !== sessionId && addMessage(message)
+        message.senderId !== sessionId &&
+          message.message !== '' &&
+          setNotification((prev) => prev + 1)
       }
       pusherClient.bind('message', messageHandler)
 

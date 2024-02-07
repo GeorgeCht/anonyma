@@ -26,8 +26,6 @@ export default async function Page({
   const sessionData = await userSession.get()
   !(await userSession.validate()) && redirect('/?sessiontimeout')
 
-  const channelAccessType = channelData.access
-
   return (
     <Suspense fallback={null}>
       <InnerSection>

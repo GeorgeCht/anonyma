@@ -8,10 +8,12 @@ import { wait } from '@/lib/utils'
 import { authUser } from '@/app/actions/auth-user'
 import { createUser } from '@/app/actions/create-user'
 import { PleaseWait, LoaderKeywords } from '@/features/auth'
+import useClientSession from '@/stores/session'
 
 const LoaderPage = () => {
   const [isPending, startTransition] = useTransition()
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const { setSession } = useClientSession()
 
   const { push } = useRouter()
   const searchParams = useSearchParams()
@@ -29,6 +31,7 @@ const LoaderPage = () => {
           const authedUser = await authUser(newUser)
           setIsLoading(false)
           if (authedUser) {
+            setSession(authedUser.id, authedUser.name)
             await wait(userCreationTimeout)
             if (redirectParam) {
               push(`/c/${redirectParam}?onboarding`)

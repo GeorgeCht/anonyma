@@ -30,4 +30,5 @@ interface Message {
   senderUsername: string
   message: string
   timestamp: number
+  delivered: boolean
 }

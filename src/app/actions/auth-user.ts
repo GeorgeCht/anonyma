@@ -14,7 +14,10 @@ export async function authUser(userData: User) {
       authStatus: true,
       expiresAt: Date.now() + expiration * 1000,
     })
-    return user as User
+    return {
+      id: userData.id,
+      name: user.name,
+    } as Pick<User, 'id' | 'name'>
   } else {
     return null
   }

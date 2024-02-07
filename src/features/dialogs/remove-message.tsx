@@ -24,7 +24,7 @@ import useMessages from '@/stores/messages'
 
 const RemoveMessage = ({ children }: { children: React.ReactNode }) => {
   const [dialogOpen, setDialogOpen] = useState(false)
-  const { actionMessage, channelId } = useMessages()
+  const { actionMessage, channelId, addMessage } = useMessages()
 
   const { register, reset, setError } = useForm<MessageSchemaType>({
     resolver: zodResolver(messageSchema),
@@ -49,6 +49,7 @@ const RemoveMessage = ({ children }: { children: React.ReactNode }) => {
     if (!state) {
       return
     }
+    console.log(state)
     if (state.status === 'error') {
       state.errors === undefined && setDialogOpen(false)
       toast.error(state.message)
@@ -69,7 +70,20 @@ const RemoveMessage = ({ children }: { children: React.ReactNode }) => {
     <Dialog open={dialogOpen} onOpenChange={onOpenHandler}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className={'sm:max-w-[386px]'}>
-        <form action={formAction}>
+        <form
+          action={formAction}
+          onSubmit={() => {
+            // Optimistically removes message
+            addMessage({
+              id: actionMessage?.id!,
+              senderId: actionMessage?.senderId!,
+              senderUsername: actionMessage?.senderUsername!,
+              message: '',
+              timestamp: actionMessage?.timestamp!,
+              delivered: false,
+            })
+          }}
+        >
           <DialogHeader>
             <div className={'flex items-center flex-row'}>
               <AlertTriangle className={'w-5 h-5 mr-3'} />
