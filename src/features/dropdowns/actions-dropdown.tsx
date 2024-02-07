@@ -236,15 +236,16 @@ const ActionsDropdown = ({ children }: { children: React.ReactNode }) => {
               </DropdownMenuShortcut>
             </DropdownMenuItem>
           ) : null}
-
-          <DropdownMenuItem>
-            <Link href={'http://github.com'}>
+          <Link href={'https://github.com/georgecht/anonyma/issues'}>
+            <DropdownMenuItem className={'hover:cursor-pointer'}>
               <span>Support</span>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <span>About</span>
-          </DropdownMenuItem>
+            </DropdownMenuItem>
+          </Link>
+          <Link href={'https://github.com/georgecht/anonyma'}>
+            <DropdownMenuItem className={'hover:cursor-pointer'}>
+              <span>About</span>
+            </DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
