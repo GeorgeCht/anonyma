@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/GeorgeCht/anonyma/compare/v0.6.0...v1.0.1) (2024-02-07)
+
+
+### 🚚 Chores
+
+* **version:** v1.0.0 release ([9dfeae0](https://github.com/GeorgeCht/anonyma/commit/9dfeae08084e002042258a7761de145603019691))
+
+
+### 🐛 Bug Fixes
+
+* tS error fix ([2dfbb7f](https://github.com/GeorgeCht/anonyma/commit/2dfbb7f496cca5d2a63a0a1abbcfa9e449ba3b36))
+
 ## [0.6.0](https://github.com/GeorgeCht/anonyma/compare/v0.5.1...v0.6.0) (2024-02-07)
 
 
